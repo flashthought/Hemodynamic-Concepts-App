@@ -1,0 +1,125 @@
+patient,scenario,type,onset_t,app_status,truth_status,app_d_map,true_d_map,app_r_change_pct,true_r_change_pct,confounded,agree
+synthetic_4779,fluid_challenge,fluid,104.6,no clear response,no clear response,-2.8,-2.94,-25.3,-3.01,False,True
+synthetic_4780,mixed_shock_stiff,fluid,92.7,no clear response,no clear response,-3.2,-3.07,-27.5,-9.71,True,True
+synthetic_4780,mixed_shock_stiff,vasopressor,94.8,no clear response,no clear response,0.2,0.39,-24.5,-5.6,True,True
+synthetic_4791,vasopressor_rescue,vasopressor,104.2,improving,improving,29.5,29.04,75.8,42.7,False,True
+synthetic_4800,fluid_challenge,fluid,85.1,possible worsening,possible worsening,-7.0,-6.58,-13.0,-6.97,False,True
+synthetic_4802,hemorrhage_resuscitation,fluid,86.6,no clear response,no clear response,1.1,0.92,-14.5,2.29,False,True
+synthetic_4814,fluid_challenge,fluid,84.1,no clear response,no clear response,-0.8,-3.94,-39.1,-5.4,False,True
+synthetic_4815,mixed_shock_stiff,fluid,89.9,no clear response,no clear response,-2.9,-2.54,-8.2,-9.35,True,True
+synthetic_4815,mixed_shock_stiff,vasopressor,100.8,improving,improving,13.2,13.03,-4.9,16.02,True,True
+synthetic_4828,fluid_challenge,fluid,82.3,possible worsening,possible worsening,-6.0,-6.01,-28.8,-7.89,False,True
+synthetic_483,hemorrhage_resuscitation,fluid,96.8,no clear response,no clear response,0.1,0.04,-21.8,0.9,False,True
+synthetic_4830,hemorrhage_resuscitation,fluid,81.4,possible worsening,improving,-6.2,9.13,-5.6,20.24,False,False
+synthetic_4842,fluid_challenge,fluid,95.8,possible worsening,possible worsening,-9.5,-9.19,-2.4,-7.54,False,True
+synthetic_4843,mixed_shock_stiff,fluid,74.5,possible worsening,possible worsening,-6.0,-10.53,-44.4,-29.64,True,True
+synthetic_4844,hemorrhage_resuscitation,fluid,98.5,no clear response,no clear response,1.8,1.7,-13.2,3.56,False,True
+synthetic_4849,fluid_challenge,fluid,74.7,possible worsening,possible worsening,-5.5,-5.53,-23.9,-7.31,False,True
+synthetic_4851,hemorrhage_resuscitation,fluid,98.1,possible worsening,possible worsening,-7.6,-7.15,6.1,-4.94,False,True
+synthetic_4861,vasopressor_rescue,vasopressor,89.6,no clear response,improving,1.9,5.49,8.4,19.93,False,False
+synthetic_4871,mixed_shock_stiff,fluid,81.3,no clear response,no clear response,0.6,0.03,-53.7,-5.32,True,True
+synthetic_4872,hemorrhage_resuscitation,fluid,86.9,improving,improving,7.8,7.81,7.3,11.32,False,True
+synthetic_4879,hemorrhage_resuscitation,fluid,104.6,no clear response,no clear response,-2.2,-1.77,-35.8,-1.03,False,True
+synthetic_4886,hemorrhage_resuscitation,fluid,96.3,no clear response,no clear response,0.7,0.67,-32.8,1.36,False,True
+synthetic_4893,hemorrhage_resuscitation,fluid,89.9,improving,improving,15.7,15.36,16.9,17.14,False,True
+synthetic_4906,mixed_shock_stiff,fluid,75.1,possible worsening,possible worsening,-16.7,-16.78,-51.7,-25.8,True,True
+synthetic_4913,mixed_shock_stiff,fluid,80.5,no clear response,no clear response,2.9,3.09,-14.7,2.2,True,True
+synthetic_4913,mixed_shock_stiff,vasopressor,88.3,improving,improving,6.8,6.9,-2.0,16.76,True,True
+synthetic_4914,hemorrhage_resuscitation,fluid,80.8,no clear response,no clear response,3.8,3.64,5.8,5.7,False,True
+synthetic_4920,mixed_shock_stiff,fluid,69.6,possible worsening,possible worsening,-24.4,-24.26,-38.9,-26.82,True,True
+synthetic_4920,mixed_shock_stiff,vasopressor,90.6,no clear response,no clear response,-3.5,-3.84,-7.8,-8.28,True,True
+synthetic_4924,vasopressor_rescue,vasopressor,88.9,no clear response,no clear response,-2.4,-2.18,-29.2,-16.98,False,True
+synthetic_4926,fluid_challenge,fluid,102.6,no clear response,no clear response,-3.6,-3.79,-2.6,-3.84,False,True
+synthetic_4935,hemorrhage_resuscitation,fluid,92.7,no clear response,no clear response,2.3,2.22,-19.7,4.62,False,True
+synthetic_4942,hemorrhage_resuscitation,fluid,73.9,improving,improving,10.8,11.14,2.9,12.22,False,True
+synthetic_4948,mixed_shock_stiff,fluid,93.9,improving,improving,8.8,8.95,-0.9,21.63,True,True
+synthetic_4948,mixed_shock_stiff,vasopressor,97.3,improving,improving,9.6,9.69,-1.0,23.52,True,True
+synthetic_495,fluid_challenge,fluid,89.1,possible worsening,possible worsening,-5.4,-5.45,-27.0,-6.83,False,True
+synthetic_4955,mixed_shock_stiff,fluid,82.3,possible worsening,possible worsening,-11.8,-16.24,-45.1,-34.7,True,True
+synthetic_4959,vasopressor_rescue,vasopressor,101.9,improving,improving,24.4,24.35,43.7,61.16,False,True
+synthetic_497,hemorrhage_resuscitation,fluid,87.4,improving,improving,11.9,11.88,-0.4,14.55,False,True
+synthetic_4975,fluid_challenge,fluid,96.2,possible worsening,possible worsening,-6.6,-6.59,-16.1,-8.05,False,True
+synthetic_4977,hemorrhage_resuscitation,fluid,82.6,improving,improving,15.7,8.71,20.4,10.27,False,True
+synthetic_4990,mixed_shock_stiff,fluid,96.4,improving,no clear response,5.2,4.8,-13.8,7.7,True,False
+synthetic_500,vasopressor_rescue,vasopressor,90.0,improving,improving,9.3,9.28,1.1,18.2,False,True
+synthetic_507,vasopressor_rescue,vasopressor,102.3,improving,improving,16.1,16.04,22.8,29.09,False,True
+synthetic_510,mixed_shock_stiff,vasopressor,87.9,improving,improving,7.1,7.16,-22.0,9.4,True,True
+synthetic_510,mixed_shock_stiff,fluid,101.5,improving,improving,12.7,13.23,-18.1,30.89,True,True
+synthetic_511,hemorrhage_resuscitation,fluid,74.7,improving,improving,8.0,8.12,-2.6,8.41,False,True
+synthetic_523,fluid_challenge,fluid,76.0,no clear response,no clear response,-3.2,-3.08,-31.7,-5.65,False,True
+synthetic_524,mixed_shock_stiff,fluid,73.4,no clear response,no clear response,1.1,-0.79,18.3,-8.76,True,True
+synthetic_524,mixed_shock_stiff,vasopressor,102.4,no clear response,improving,1.0,5.46,6.9,24.79,True,False
+synthetic_530,fluid_challenge,fluid,89.0,possible worsening,possible worsening,-6.1,-6.19,-28.3,-7.32,False,True
+synthetic_537,fluid_challenge,fluid,85.0,no clear response,no clear response,-3.7,-3.3,23.8,-2.83,False,True
+synthetic_542,vasopressor_rescue,vasopressor,89.8,improving,improving,7.2,7.07,-16.7,11.68,False,True
+synthetic_551,fluid_challenge,fluid,85.8,no clear response,no clear response,-3.3,-3.12,-3.9,-3.61,False,True
+synthetic_552,mixed_shock_stiff,fluid,71.1,possible worsening,possible worsening,-54.9,-55.2,-20.1,-42.29,True,True
+synthetic_552,mixed_shock_stiff,vasopressor,101.7,improving,improving,16.0,16.29,17.5,20.05,True,True
+synthetic_577,vasopressor_rescue,vasopressor,103.4,improving,improving,23.2,23.27,77.0,42.23,False,True
+synthetic_586,fluid_challenge,fluid,70.3,no clear response,no clear response,-2.6,-2.67,-25.9,-3.82,False,True
+synthetic_600,fluid_challenge,fluid,73.6,no clear response,no clear response,-4.6,-4.63,-22.8,-7.6,False,True
+synthetic_608,mixed_shock_stiff,vasopressor,95.1,improving,improving,8.6,8.8,-54.2,9.42,True,True
+synthetic_608,mixed_shock_stiff,fluid,104.2,improving,improving,10.6,10.64,-56.3,22.65,True,True
+synthetic_619,vasopressor_rescue,vasopressor,99.0,improving,improving,23.7,23.93,33.0,36.08,False,True
+synthetic_628,fluid_challenge,fluid,78.5,possible worsening,possible worsening,-6.0,-5.83,-38.8,-6.45,False,True
+synthetic_630,hemorrhage_resuscitation,fluid,88.4,improving,improving,11.7,11.65,-4.5,14.72,False,True
+synthetic_635,fluid_challenge,fluid,103.3,no clear response,no clear response,-2.7,-2.64,-46.5,-4.0,False,True
+synthetic_643,mixed_shock_stiff,fluid,97.6,no clear response,no clear response,3.2,3.3,19.0,6.65,True,True
+synthetic_643,mixed_shock_stiff,vasopressor,103.7,no clear response,improving,4.1,4.1,6.1,11.89,True,False
+synthetic_656,fluid_challenge,fluid,78.9,possible worsening,possible worsening,-6.7,-6.15,20.7,-6.46,False,True
+synthetic_658,hemorrhage_resuscitation,fluid,89.6,no clear response,no clear response,0.6,0.42,-24.2,1.99,False,True
+synthetic_663,fluid_challenge,fluid,103.4,possible worsening,no clear response,-19.3,-2.59,-29.2,-4.34,False,False
+synthetic_665,hemorrhage_resuscitation,fluid,99.4,no clear response,no clear response,1.6,1.49,-19.0,5.61,False,True
+synthetic_668,vasopressor_rescue,vasopressor,88.1,improving,improving,30.4,33.34,36.3,81.32,False,True
+synthetic_672,hemorrhage_resuscitation,fluid,77.3,improving,improving,6.1,5.93,-20.3,12.45,False,True
+synthetic_677,fluid_challenge,fluid,73.9,no clear response,no clear response,-3.3,-3.48,-23.8,-6.41,False,True
+synthetic_678,mixed_shock_stiff,fluid,74.6,no clear response,no clear response,1.8,-1.41,-16.4,-9.53,True,True
+synthetic_678,mixed_shock_stiff,vasopressor,97.4,no clear response,improving,1.4,5.98,-5.7,28.72,True,False
+synthetic_691,fluid_challenge,fluid,75.8,no clear response,no clear response,-2.0,-2.07,-45.8,-2.71,False,True
+synthetic_692,mixed_shock_stiff,fluid,85.9,no clear response,no clear response,4.1,4.13,-19.7,2.44,True,True
+synthetic_692,mixed_shock_stiff,vasopressor,103.9,improving,improving,9.3,9.19,-5.2,13.29,True,True
+synthetic_693,hemorrhage_resuscitation,fluid,83.6,improving,improving,7.3,7.15,9.9,9.06,False,True
+synthetic_706,mixed_shock_stiff,fluid,104.9,improving,improving,10.3,10.41,22.0,22.78,True,True
+synthetic_713,mixed_shock_stiff,fluid,96.0,no clear response,no clear response,4.5,4.56,-9.8,4.12,True,True
+synthetic_714,hemorrhage_resuscitation,fluid,98.4,no clear response,no clear response,-2.3,-2.16,-41.2,-3.1,False,True
+synthetic_724,vasopressor_rescue,vasopressor,103.1,improving,improving,6.0,7.52,8.9,17.63,False,True
+synthetic_738,vasopressor_rescue,vasopressor,95.7,improving,improving,20.6,20.39,11.8,27.48,False,True
+synthetic_754,fluid_challenge,fluid,105.0,possible worsening,possible worsening,-7.7,-8.16,-33.0,-7.42,False,True
+synthetic_755,mixed_shock_stiff,vasopressor,89.3,improving,improving,6.2,6.23,-25.4,11.66,True,True
+synthetic_755,mixed_shock_stiff,fluid,103.0,improving,improving,8.0,7.92,-31.8,14.3,True,True
+synthetic_768,fluid_challenge,fluid,74.9,possible worsening,possible worsening,-8.1,-8.18,9.8,-7.42,False,True
+synthetic_776,mixed_shock_stiff,vasopressor,96.8,improving,improving,13.7,16.38,9.0,32.89,True,True
+synthetic_776,mixed_shock_stiff,fluid,98.7,improving,improving,13.7,16.44,11.5,34.12,True,True
+synthetic_780,vasopressor_rescue,vasopressor,93.7,improving,improving,6.7,6.91,11.6,12.92,False,True
+synthetic_798,hemorrhage_resuscitation,fluid,89.5,no clear response,no clear response,1.1,1.48,11.8,2.34,False,True
+synthetic_803,fluid_challenge,fluid,100.2,possible worsening,possible worsening,-5.0,-5.25,23.4,-5.23,False,True
+synthetic_808,vasopressor_rescue,vasopressor,101.4,improving,improving,12.9,12.94,33.3,17.15,False,True
+synthetic_822,vasopressor_rescue,vasopressor,104.8,improving,improving,27.1,27.39,16.5,35.01,False,True
+synthetic_826,hemorrhage_resuscitation,fluid,92.6,improving,improving,16.2,16.12,6.2,20.26,False,True
+synthetic_860,mixed_shock_stiff,fluid,104.5,improving,improving,12.1,12.01,1.8,24.23,True,True
+synthetic_861,hemorrhage_resuscitation,fluid,76.6,improving,improving,8.5,8.79,-1.9,9.73,False,True
+synthetic_874,mixed_shock_stiff,fluid,101.8,no clear response,improving,1.7,8.39,-8.8,16.87,True,False
+synthetic_878,vasopressor_rescue,vasopressor,99.2,improving,improving,34.0,33.73,59.6,54.45,False,True
+synthetic_882,hemorrhage_resuscitation,fluid,89.2,improving,improving,13.3,13.31,8.9,20.04,False,True
+synthetic_887,fluid_challenge,fluid,72.2,no clear response,no clear response,-4.1,-4.27,-18.9,-4.92,False,True
+synthetic_888,mixed_shock_stiff,fluid,102.6,improving,improving,11.8,11.78,9.6,22.71,True,True
+synthetic_888,mixed_shock_stiff,vasopressor,104.4,improving,improving,11.9,12.01,10.8,23.63,True,True
+synthetic_894,fluid_challenge,fluid,78.6,no clear response,no clear response,-1.8,-1.92,-64.0,-2.89,False,True
+synthetic_896,hemorrhage_resuscitation,fluid,96.1,no clear response,no clear response,-0.4,-0.45,-20.9,1.39,False,True
+synthetic_901,fluid_challenge,fluid,90.0,no clear response,no clear response,-1.8,-1.97,-22.9,-3.28,False,True
+synthetic_902,mixed_shock_stiff,fluid,81.6,possible worsening,possible worsening,-22.3,-22.29,-5.8,-23.96,True,True
+synthetic_902,mixed_shock_stiff,vasopressor,102.5,improving,improving,21.3,21.09,33.6,23.94,True,True
+synthetic_903,hemorrhage_resuscitation,fluid,102.4,no clear response,no clear response,-2.9,-2.89,6.4,-2.18,False,True
+synthetic_910,hemorrhage_resuscitation,fluid,91.4,no clear response,no clear response,2.1,1.91,-16.0,7.4,False,True
+synthetic_920,vasopressor_rescue,vasopressor,87.8,improving,improving,20.7,20.67,40.2,46.55,False,True
+synthetic_930,mixed_shock_stiff,fluid,72.6,possible worsening,possible worsening,-12.8,-13.45,-47.0,-23.02,True,True
+synthetic_930,mixed_shock_stiff,vasopressor,98.8,improving,improving,7.7,7.85,13.6,14.13,True,True
+synthetic_931,hemorrhage_resuscitation,fluid,71.9,improving,improving,9.1,8.98,-7.8,16.31,False,True
+synthetic_943,fluid_challenge,fluid,69.9,no clear response,no clear response,-1.8,-1.61,-26.4,-3.29,False,True
+synthetic_944,mixed_shock_stiff,fluid,79.8,possible worsening,possible worsening,-21.3,-21.28,-17.7,-24.88,True,True
+synthetic_958,mixed_shock_stiff,fluid,77.8,possible worsening,possible worsening,-39.0,-39.17,-9.3,-31.29,True,True
+synthetic_971,fluid_challenge,fluid,74.3,possible worsening,possible worsening,-5.6,-5.53,18.5,-5.84,False,True
+synthetic_978,fluid_challenge,fluid,80.2,no clear response,no clear response,-2.8,-2.91,-27.9,-3.62,False,True
+synthetic_979,mixed_shock_stiff,vasopressor,102.8,improving,improving,15.5,15.58,0.2,24.85,True,True
+synthetic_979,mixed_shock_stiff,fluid,102.9,improving,improving,15.5,15.58,0.2,24.85,True,True
+synthetic_994,hemorrhage_resuscitation,fluid,99.1,no clear response,no clear response,1.6,1.57,-11.0,4.66,False,True

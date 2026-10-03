@@ -1,0 +1,52 @@
+[1/5] calibration - synthetic: 140 validation patients
+      35/140
+      70/140
+      105/140
+      140/140
+      ppg_ecg_abp                n= 15578 bias=  +0.25 mae   3.89 ->   3.92  rmse(after)=  5.43
+      ppg_ecg                    n= 22290 bias= -15.22 mae  21.98 ->  19.71  rmse(after)= 24.23
+      ppg_ecg_abp_intervention   n=  5812 bias=  -9.01 mae   9.45 ->   4.98  rmse(after)=  6.34
+      calibration - real: 25 VitalDB validation cases (29 eligible)
+      ppg_ecg                    n=  9473 bias= -16.36 mae  19.88 ->  15.62  rmse(after)= 21.08
+      ppg_ecg_abp                n=  4773 bias=  -1.56 mae   4.27 ->   3.96  rmse(after)=  8.28
+      ppg_ecg_abp_intervention   n=  3470 bias=  -2.38 mae   4.12 ->   3.47  rmse(after)=  7.73
+[2/5] verification on 210 synthetic test patients
+      25/210
+      50/210
+      75/210
+      100/210
+      125/210
+      150/210
+      175/210
+      200/210
+      hazard H-09 on 90 shock-scenario test patients (4 configurations)
+        Version 5 baseline                               under-alert 0.5304  ABP rejected 0.5412  unsafe de-escalations 41
+        + RC-08 fail-safe hold                           under-alert 0.0293  ABP rejected 0.5412  unsafe de-escalations 0
+        + RC-10 measured-pressure floor                  under-alert 0.0293  ABP rejected 0.5412  unsafe de-escalations 0
+        + RC-09 shock-aware ABP check (all controls)     under-alert 0.0018  ABP rejected 0.0124  unsafe de-escalations 0
+[3/5] real-data verification on 30 held-out VitalDB test cases (31 eligible)
+      5/30
+      10/30
+      15/30
+      20/30
+      25/30
+      30/30
+[4/5] signal-quality gate on 120 windows x 5 corruptions + clean controls + genuine shock
+[4/5] signal-quality gate on 120 windows x 5 corruptions + clean controls + genuine shock
+[5/5] latency (CPU, 205 windows) and Concept C throughput
+done in 13.8 min -> evaluation/results/verification_summary.json
+  SPEC-01 Accurate short-horizon pressure forecast   A:PASS (ideal)     B:FAIL             C:PASS (ideal)
+  SPEC-02 Detect deterioration before it is missed   A:PASS (ideal)     B:FAIL             C:FAIL
+  SPEC-03 Do not alarm on stable patients            A:PASS (ideal)     B:PASS (ideal)     C:PASS (ideal)
+  SPEC-04 Limit alarm fatigue                        A:FAIL             B:PASS (marginal)  C:PASS (ideal)
+  SPEC-05 Warn earlier than a conventional monitor   A:PASS (marginal)  B:PASS (marginal)  C:n/a
+  SPEC-06 Risk estimate separates patients who will  A:PASS (ideal)     B:FAIL             C:PASS (ideal)
+  SPEC-07 Never alert from unusable signals          A:PASS (ideal)     B:PASS (ideal)     C:PASS (ideal)
+  SPEC-08 Track the patient's vascular state         A:FAIL             B:FAIL             C:FAIL
+  SPEC-09 Show whether treatment is working          A:PASS (ideal)     B:n/a              C:PASS (ideal)
+  SPEC-10 Real-time operation at the bedside         A:PASS (marginal)  B:PASS (marginal)  C:PASS (marginal)
+  SPEC-11 Works on real patients, not only simulatio A:PASS (ideal)     B:PASS (marginal)  C:PASS (ideal)
+  SPEC-12 Interpretable at a glance                  A:n/a              B:n/a              C:n/a
+  SPEC-13 Support handoff, audit and quality review  A:n/a              B:n/a              C:n/a
+  SPEC-14 Remain decision support, never prescribe t A:n/a              B:n/a              C:n/a
+  SPEC-15 Never falsely reassure during critical hyp A:PASS (marginal)  B:FAIL             C:n/a

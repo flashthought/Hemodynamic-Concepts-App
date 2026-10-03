@@ -1,0 +1,185 @@
+{
+  "description": "Demo recordings for the Hemodynamic Concepts App. All held out from Version 5 training.",
+  "version5_source": "/home/kyei/Document/Version 5",
+  "recordings": [
+    {
+      "id": "synthetic_4993",
+      "source": "synthetic",
+      "path": "synthetic/patient_4993_septic_shock.npz",
+      "title": "Simulated: septic shock",
+      "description": "Starts normotensive and deteriorates below MAP 65 - demonstrates early deterioration alerts.",
+      "split": "held-out synthetic test split (never used in training)",
+      "stats": {
+        "scenario": "septic_shock",
+        "start_map": 85.0,
+        "min_map": 48.7,
+        "end_map": 48.9,
+        "frac_below_65": 0.7,
+        "vaso_onset": null,
+        "fluid_onset": null
+      }
+    },
+    {
+      "id": "synthetic_668",
+      "source": "synthetic",
+      "path": "synthetic/patient_668_vasopressor_rescue.npz",
+      "title": "Simulated: vasopressor rescue",
+      "description": "Hypotension followed by vasopressor rescue - demonstrates intervention-response tracking.",
+      "split": "held-out synthetic test split (never used in training)",
+      "stats": {
+        "scenario": "vasopressor_rescue",
+        "start_map": 86.7,
+        "min_map": 38.8,
+        "end_map": 80.6,
+        "frac_below_65": 0.5,
+        "vaso_onset": 88.1,
+        "fluid_onset": null
+      }
+    },
+    {
+      "id": "synthetic_776",
+      "source": "synthetic",
+      "path": "synthetic/patient_776_mixed_shock_stiff.npz",
+      "title": "Simulated: mixed shock stiff",
+      "description": "Mixed shock with stiff vessels treated with vasopressor and fluid - most complex physiology.",
+      "split": "held-out synthetic test split (never used in training)",
+      "stats": {
+        "scenario": "mixed_shock_stiff",
+        "start_map": 88.8,
+        "min_map": 49.5,
+        "end_map": 70.0,
+        "frac_below_65": 0.5,
+        "vaso_onset": 96.8,
+        "fluid_onset": 98.7
+      }
+    },
+    {
+      "id": "synthetic_705",
+      "source": "synthetic",
+      "path": "synthetic/patient_705_fluid_challenge.npz",
+      "title": "Simulated: fluid challenge",
+      "description": "Fluid bolus in a normotensive patient - tests response assessment when the MAP change is small.",
+      "split": "held-out synthetic test split (never used in training)",
+      "stats": {
+        "scenario": "fluid_challenge",
+        "start_map": 88.1,
+        "min_map": 82.7,
+        "end_map": 83.6,
+        "frac_below_65": 0.0,
+        "vaso_onset": null,
+        "fluid_onset": 71.8
+      }
+    },
+    {
+      "id": "synthetic_4928",
+      "source": "synthetic",
+      "path": "synthetic/patient_4928_hemorrhage_resuscitation.npz",
+      "title": "Simulated: hemorrhage resuscitation",
+      "description": "Haemorrhage compensated by vasoconstriction, then fluid - tests R/C tracking when MAP is maintained.",
+      "split": "held-out synthetic test split (never used in training)",
+      "stats": {
+        "scenario": "hemorrhage_resuscitation",
+        "start_map": 86.0,
+        "min_map": 85.0,
+        "end_map": 95.2,
+        "frac_below_65": 0.0,
+        "vaso_onset": null,
+        "fluid_onset": 96.3
+      }
+    },
+    {
+      "id": "synthetic_792",
+      "source": "synthetic",
+      "path": "synthetic/patient_792_stable.npz",
+      "title": "Simulated: stable",
+      "description": "Haemodynamically stable throughout - checks the system does not raise false alerts.",
+      "split": "held-out synthetic test split (never used in training)",
+      "stats": {
+        "scenario": "stable",
+        "start_map": 84.9,
+        "min_map": 81.9,
+        "end_map": 83.4,
+        "frac_below_65": 0.0,
+        "vaso_onset": null,
+        "fluid_onset": null
+      }
+    },
+    {
+      "id": "synthetic_830",
+      "source": "synthetic",
+      "path": "synthetic/patient_830_low_compliance.npz",
+      "title": "Simulated: low compliance",
+      "description": "Reduced arterial compliance with stable MAP - checks compliance (C) tracking.",
+      "split": "held-out synthetic test split (never used in training)",
+      "stats": {
+        "scenario": "low_compliance",
+        "start_map": 84.7,
+        "min_map": 79.9,
+        "end_map": 80.3,
+        "frac_below_65": 0.0,
+        "vaso_onset": null,
+        "fluid_onset": null
+      }
+    },
+    {
+      "id": "vitaldb_5875",
+      "source": "vitaldb",
+      "path": "vitaldb/case_5875.npz",
+      "title": "Real (VitalDB): case 5875",
+      "description": "Real surgical case with hypotension and vasopressor infusion.",
+      "split": "held-out VitalDB fine-tuning test split (never used in training)",
+      "stats": {
+        "valid_abp_fraction": 0.995,
+        "min_map": 38.7,
+        "median_map": 57.357,
+        "frac_below_65": 0.857,
+        "has_intervention": true
+      }
+    },
+    {
+      "id": "vitaldb_6131",
+      "source": "vitaldb",
+      "path": "vitaldb/case_6131.npz",
+      "title": "Real (VitalDB): case 6131",
+      "description": "Real surgical case with hypotension and vasopressor infusion.",
+      "split": "held-out VitalDB fine-tuning test split (never used in training)",
+      "stats": {
+        "valid_abp_fraction": 0.996,
+        "min_map": 51.236,
+        "median_map": 60.072,
+        "frac_below_65": 0.804,
+        "has_intervention": true
+      }
+    },
+    {
+      "id": "vitaldb_6129",
+      "source": "vitaldb",
+      "path": "vitaldb/case_6129.npz",
+      "title": "Real (VitalDB): case 6129",
+      "description": "Real surgical case with hypotensive periods and no recorded vasopressor.",
+      "split": "held-out VitalDB fine-tuning test split (never used in training)",
+      "stats": {
+        "valid_abp_fraction": 0.985,
+        "min_map": 59.597,
+        "median_map": 64.211,
+        "frac_below_65": 0.585,
+        "has_intervention": false
+      }
+    },
+    {
+      "id": "vitaldb_5958",
+      "source": "vitaldb",
+      "path": "vitaldb/case_5958.npz",
+      "title": "Real (VitalDB): case 5958",
+      "description": "Real surgical case that stays normotensive - false-alert check.",
+      "split": "held-out VitalDB fine-tuning test split (never used in training)",
+      "stats": {
+        "valid_abp_fraction": 0.965,
+        "min_map": 72.511,
+        "median_map": 84.578,
+        "frac_below_65": 0.002,
+        "has_intervention": false
+      }
+    }
+  ]
+}

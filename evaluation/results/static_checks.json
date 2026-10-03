@@ -1,0 +1,203 @@
+{
+  "SPEC-12": {
+    "A": 9,
+    "B": 9,
+    "C": 10,
+    "not_fully_met": [
+      {
+        "n": 3,
+        "name": "User control and freedom",
+        "view": "live",
+        "evidence": "Play/pause, step, restart, speed and start position are available, but a confirmed intervention mark cannot be undone (only restarted). Design iteration item."
+      }
+    ]
+  },
+  "SPEC-13": {
+    "A": false,
+    "B": false,
+    "C": true,
+    "note": "A and B keep an on-screen event log only; C produces a printable HTML report, timeline CSV and full JSON.",
+    "exports_checked": {
+      "synthetic_4993": {
+        "report_html_bytes": 13811,
+        "csv_rows": 78,
+        "json_keys": [
+          "episodes",
+          "interventions",
+          "narrative",
+          "recording",
+          "step_sec",
+          "summary",
+          "timeline",
+          "verification",
+          "warnings"
+        ]
+      },
+      "synthetic_668": {
+        "report_html_bytes": 13938,
+        "csv_rows": 78,
+        "json_keys": [
+          "episodes",
+          "interventions",
+          "narrative",
+          "recording",
+          "step_sec",
+          "summary",
+          "timeline",
+          "verification",
+          "warnings"
+        ]
+      },
+      "synthetic_776": {
+        "report_html_bytes": 14132,
+        "csv_rows": 78,
+        "json_keys": [
+          "episodes",
+          "interventions",
+          "narrative",
+          "recording",
+          "step_sec",
+          "summary",
+          "timeline",
+          "verification",
+          "warnings"
+        ]
+      },
+      "synthetic_705": {
+        "report_html_bytes": 14249,
+        "csv_rows": 78,
+        "json_keys": [
+          "episodes",
+          "interventions",
+          "narrative",
+          "recording",
+          "step_sec",
+          "summary",
+          "timeline",
+          "verification",
+          "warnings"
+        ]
+      },
+      "synthetic_4928": {
+        "report_html_bytes": 13973,
+        "csv_rows": 78,
+        "json_keys": [
+          "episodes",
+          "interventions",
+          "narrative",
+          "recording",
+          "step_sec",
+          "summary",
+          "timeline",
+          "verification",
+          "warnings"
+        ]
+      },
+      "synthetic_792": {
+        "report_html_bytes": 13467,
+        "csv_rows": 78,
+        "json_keys": [
+          "episodes",
+          "interventions",
+          "narrative",
+          "recording",
+          "step_sec",
+          "summary",
+          "timeline",
+          "verification",
+          "warnings"
+        ]
+      },
+      "synthetic_830": {
+        "report_html_bytes": 13666,
+        "csv_rows": 78,
+        "json_keys": [
+          "episodes",
+          "interventions",
+          "narrative",
+          "recording",
+          "step_sec",
+          "summary",
+          "timeline",
+          "verification",
+          "warnings"
+        ]
+      },
+      "vitaldb_5875": {
+        "report_html_bytes": 101735,
+        "csv_rows": 888,
+        "json_keys": [
+          "episodes",
+          "interventions",
+          "narrative",
+          "recording",
+          "step_sec",
+          "summary",
+          "timeline",
+          "verification",
+          "warnings"
+        ]
+      },
+      "vitaldb_6131": {
+        "report_html_bytes": 100683,
+        "csv_rows": 888,
+        "json_keys": [
+          "episodes",
+          "interventions",
+          "narrative",
+          "recording",
+          "step_sec",
+          "summary",
+          "timeline",
+          "verification",
+          "warnings"
+        ]
+      },
+      "vitaldb_6129": {
+        "report_html_bytes": 102352,
+        "csv_rows": 888,
+        "json_keys": [
+          "episodes",
+          "interventions",
+          "narrative",
+          "recording",
+          "step_sec",
+          "summary",
+          "timeline",
+          "verification",
+          "warnings"
+        ]
+      },
+      "vitaldb_5958": {
+        "report_html_bytes": 101781,
+        "csv_rows": 888,
+        "json_keys": [
+          "episodes",
+          "interventions",
+          "narrative",
+          "recording",
+          "step_sec",
+          "summary",
+          "timeline",
+          "verification",
+          "warnings"
+        ]
+      }
+    }
+  },
+  "SPEC-14": {
+    "A": 0,
+    "B": 0,
+    "C": 0
+  },
+  "SPEC-14_sentences_scanned": {
+    "A": 5914,
+    "B": 4098,
+    "C": 73
+  },
+  "SPEC-14_hits": {
+    "A": [],
+    "B": [],
+    "C": []
+  }
+}

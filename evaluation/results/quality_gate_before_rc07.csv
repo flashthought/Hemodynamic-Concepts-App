@@ -1,0 +1,755 @@
+patient,t_end,corruption,expected,status,regime,handled_safely,warnings
+synthetic_650,112.2,clean,usable,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_650,112.2,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_650,112.2,ppg_dropout,abstain,low_confidence,ppg_ecg,False,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_650,112.2,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_650,112.2,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_650,112.2,ecg_flatline,ecg_dropped,low_confidence,ppg_only,True,ecg appears flatlined | ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_559,146.6,clean,usable,ok,ppg_ecg_abp_intervention,True,
+synthetic_559,146.6,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_559,146.6,ppg_dropout,abstain,ok,ppg_ecg_abp_intervention,False,
+synthetic_559,146.6,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_559,146.6,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_559,146.6,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp_intervention,True,ecg appears flatlined
+synthetic_976,65.0,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_976,65.0,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_976,65.0,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_976,65.0,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_976,65.0,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_976,65.0,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_999,59.4,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_999,59.4,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_999,59.4,ppg_dropout,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_999,59.4,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_999,59.4,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_999,59.4,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_4788,58.6,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_4788,58.6,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_4788,58.6,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_4788,58.6,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4788,58.6,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4788,58.6,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_4939,28.3,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_4939,28.3,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_4939,28.3,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_4939,28.3,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4939,28.3,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4939,28.3,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_706,112.8,clean,usable,ok,ppg_ecg_abp_intervention,True,
+synthetic_706,112.8,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_706,112.8,ppg_dropout,abstain,ok,ppg_ecg_abp_intervention,False,
+synthetic_706,112.8,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_706,112.8,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_706,112.8,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp_intervention,True,ecg appears flatlined
+synthetic_812,137.0,clean,usable,ok,ppg_ecg_abp_intervention,True,
+synthetic_812,137.0,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_812,137.0,ppg_dropout,abstain,ok,ppg_ecg_abp_intervention,False,
+synthetic_812,137.0,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_812,137.0,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_812,137.0,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp_intervention,True,ecg appears flatlined
+synthetic_751,83.3,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_751,83.3,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_751,83.3,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_751,83.3,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_751,83.3,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_751,83.3,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_4979,96.5,clean,usable,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4979,96.5,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_4979,96.5,ppg_dropout,abstain,low_confidence,ppg_ecg,False,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4979,96.5,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4979,96.5,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4979,96.5,ecg_flatline,ecg_dropped,low_confidence,ppg_only,True,ecg appears flatlined | ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4780,158.6,clean,usable,ok,ppg_ecg_abp_intervention,True,
+synthetic_4780,158.6,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_4780,158.6,ppg_dropout,abstain,ok,ppg_ecg_abp_intervention,False,
+synthetic_4780,158.6,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4780,158.6,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4780,158.6,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp_intervention,True,ecg appears flatlined
+synthetic_606,118.3,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_606,118.3,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_606,118.3,ppg_dropout,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_606,118.3,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_606,118.3,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_606,118.3,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_480,125.5,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_480,125.5,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_480,125.5,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_480,125.5,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_480,125.5,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_480,125.5,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_757,147.9,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_757,147.9,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_757,147.9,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_757,147.9,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_757,147.9,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_757,147.9,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_673,43.4,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_673,43.4,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_673,43.4,ppg_dropout,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_673,43.4,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_673,43.4,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_673,43.4,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_4943,110.8,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_4943,110.8,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_4943,110.8,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_4943,110.8,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4943,110.8,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4943,110.8,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_547,121.2,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_547,121.2,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_547,121.2,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_547,121.2,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_547,121.2,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_547,121.2,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_915,140.5,clean,usable,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_915,140.5,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_915,140.5,ppg_dropout,abstain,low_confidence,ppg_ecg,False,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_915,140.5,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_915,140.5,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_915,140.5,ecg_flatline,ecg_dropped,low_confidence,ppg_only,True,ecg appears flatlined | ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_702,63.3,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_702,63.3,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_702,63.3,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_702,63.3,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_702,63.3,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_702,63.3,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_574,116.8,clean,usable,ok,ppg_ecg_abp_intervention,True,
+synthetic_574,116.8,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_574,116.8,ppg_dropout,abstain,ok,ppg_ecg_abp_intervention,False,
+synthetic_574,116.8,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_574,116.8,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_574,116.8,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp_intervention,True,ecg appears flatlined
+synthetic_523,103.7,clean,usable,ok,ppg_ecg_abp_intervention,True,
+synthetic_523,103.7,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_523,103.7,ppg_dropout,abstain,ok,ppg_ecg_abp_intervention,False,
+synthetic_523,103.7,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_523,103.7,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_523,103.7,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp_intervention,True,ecg appears flatlined
+synthetic_4870,73.5,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_4870,73.5,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_4870,73.5,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_4870,73.5,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4870,73.5,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4870,73.5,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_4774,25.8,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_4774,25.8,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_4774,25.8,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_4774,25.8,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4774,25.8,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4774,25.8,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_661,64.7,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_661,64.7,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_661,64.7,ppg_dropout,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_661,64.7,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_661,64.7,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_661,64.7,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_679,159.3,clean,usable,ok,ppg_ecg_abp_intervention,True,
+synthetic_679,159.3,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_679,159.3,ppg_dropout,abstain,ok,ppg_ecg_abp_intervention,False,
+synthetic_679,159.3,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_679,159.3,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_679,159.3,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp_intervention,True,ecg appears flatlined
+synthetic_4877,43.6,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_4877,43.6,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_4877,43.6,ppg_dropout,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_4877,43.6,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4877,43.6,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4877,43.6,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_805,27.6,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_805,27.6,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_805,27.6,ppg_dropout,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_805,27.6,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_805,27.6,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_805,27.6,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_887,67.0,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_887,67.0,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_887,67.0,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_887,67.0,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_887,67.0,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_887,67.0,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_543,25.7,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_543,25.7,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_543,25.7,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_543,25.7,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_543,25.7,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_543,25.7,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_4829,51.4,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_4829,51.4,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_4829,51.4,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_4829,51.4,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4829,51.4,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4829,51.4,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_851,151.7,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_851,151.7,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_851,151.7,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_851,151.7,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_851,151.7,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_851,151.7,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_913,59.4,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_913,59.4,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_913,59.4,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_913,59.4,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_913,59.4,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_913,59.4,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_4894,100.8,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_4894,100.8,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_4894,100.8,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_4894,100.8,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4894,100.8,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4894,100.8,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_698,47.0,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_698,47.0,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_698,47.0,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_698,47.0,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_698,47.0,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_698,47.0,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_880,113.5,clean,usable,ok,ppg_ecg_abp_intervention,True,
+synthetic_880,113.5,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_880,113.5,ppg_dropout,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_880,113.5,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_880,113.5,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_880,113.5,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp_intervention,True,ecg appears flatlined
+synthetic_4843,29.8,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_4843,29.8,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_4843,29.8,ppg_dropout,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_4843,29.8,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4843,29.8,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4843,29.8,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_981,132.4,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_981,132.4,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_981,132.4,ppg_dropout,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_981,132.4,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_981,132.4,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_981,132.4,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_4992,75.6,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_4992,75.6,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_4992,75.6,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_4992,75.6,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4992,75.6,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4992,75.6,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_990,38.5,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_990,38.5,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_990,38.5,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_990,38.5,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_990,38.5,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_990,38.5,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_947,127.5,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_947,127.5,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_947,127.5,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_947,127.5,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_947,127.5,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_947,127.5,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_560,95.9,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_560,95.9,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_560,95.9,ppg_dropout,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_560,95.9,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_560,95.9,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_560,95.9,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_973,77.9,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_973,77.9,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_973,77.9,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_973,77.9,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_973,77.9,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_973,77.9,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_959,47.3,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_959,47.3,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_959,47.3,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_959,47.3,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_959,47.3,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_959,47.3,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_540,131.1,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_540,131.1,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_540,131.1,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_540,131.1,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_540,131.1,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_540,131.1,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_4875,66.6,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_4875,66.6,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_4875,66.6,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_4875,66.6,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4875,66.6,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4875,66.6,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_945,16.7,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_945,16.7,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_945,16.7,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_945,16.7,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_945,16.7,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_945,16.7,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_914,159.6,clean,usable,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_914,159.6,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_914,159.6,ppg_dropout,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_914,159.6,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_914,159.6,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_914,159.6,ecg_flatline,ecg_dropped,low_confidence,ppg_only,True,ecg appears flatlined | ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_554,14.7,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_554,14.7,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_554,14.7,ppg_dropout,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_554,14.7,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_554,14.7,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_554,14.7,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_924,28.7,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_924,28.7,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_924,28.7,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_924,28.7,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_924,28.7,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_924,28.7,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_961,82.2,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_961,82.2,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_961,82.2,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_961,82.2,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_961,82.2,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_961,82.2,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_618,42.2,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_618,42.2,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_618,42.2,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_618,42.2,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_618,42.2,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_618,42.2,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_676,61.9,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_676,61.9,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_676,61.9,ppg_dropout,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_676,61.9,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_676,61.9,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_676,61.9,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_948,98.0,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_948,98.0,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_948,98.0,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_948,98.0,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_948,98.0,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_948,98.0,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_591,158.5,clean,usable,ok,ppg_ecg_abp_intervention,True,
+synthetic_591,158.5,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_591,158.5,ppg_dropout,abstain,ok,ppg_ecg_abp_intervention,False,
+synthetic_591,158.5,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_591,158.5,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_591,158.5,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp_intervention,True,ecg appears flatlined
+synthetic_546,155.1,clean,usable,ok,ppg_ecg_abp_intervention,True,
+synthetic_546,155.1,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_546,155.1,ppg_dropout,abstain,ok,ppg_ecg_abp_intervention,False,
+synthetic_546,155.1,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_546,155.1,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_546,155.1,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp_intervention,True,ecg appears flatlined
+synthetic_715,21.5,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_715,21.5,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_715,21.5,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_715,21.5,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_715,21.5,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_715,21.5,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_994,142.3,clean,usable,ok,ppg_ecg_abp_intervention,True,
+synthetic_994,142.3,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_994,142.3,ppg_dropout,abstain,ok,ppg_ecg_abp_intervention,False,
+synthetic_994,142.3,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_994,142.3,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_994,142.3,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp_intervention,True,ecg appears flatlined
+synthetic_842,36.0,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_842,36.0,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_842,36.0,ppg_dropout,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_842,36.0,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_842,36.0,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_842,36.0,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_916,135.8,clean,usable,ok,ppg_ecg_abp_intervention,True,
+synthetic_916,135.8,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_916,135.8,ppg_dropout,abstain,ok,ppg_ecg_abp_intervention,False,
+synthetic_916,135.8,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_916,135.8,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_916,135.8,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp_intervention,True,ecg appears flatlined
+synthetic_4898,55.9,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_4898,55.9,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_4898,55.9,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_4898,55.9,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4898,55.9,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4898,55.9,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_577,121.3,clean,usable,ok,ppg_ecg_abp_intervention,True,
+synthetic_577,121.3,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_577,121.3,ppg_dropout,abstain,ok,ppg_ecg_abp_intervention,False,
+synthetic_577,121.3,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_577,121.3,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_577,121.3,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp_intervention,True,ecg appears flatlined
+synthetic_898,121.4,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_898,121.4,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_898,121.4,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_898,121.4,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_898,121.4,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_898,121.4,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_4978,141.8,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_4978,141.8,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_4978,141.8,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_4978,141.8,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4978,141.8,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4978,141.8,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_590,161.8,clean,usable,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_590,161.8,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_590,161.8,ppg_dropout,abstain,low_confidence,ppg_ecg,False,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_590,161.8,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_590,161.8,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_590,161.8,ecg_flatline,ecg_dropped,low_confidence,ppg_only,True,ecg appears flatlined | ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4910,52.7,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_4910,52.7,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_4910,52.7,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_4910,52.7,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4910,52.7,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4910,52.7,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_669,107.4,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_669,107.4,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_669,107.4,ppg_dropout,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_669,107.4,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_669,107.4,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_669,107.4,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_684,124.6,clean,usable,ok,ppg_ecg_abp_intervention,True,
+synthetic_684,124.6,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_684,124.6,ppg_dropout,abstain,ok,ppg_ecg_abp_intervention,False,
+synthetic_684,124.6,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_684,124.6,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_684,124.6,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp_intervention,True,ecg appears flatlined
+synthetic_856,22.3,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_856,22.3,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_856,22.3,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_856,22.3,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_856,22.3,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_856,22.3,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_603,112.8,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_603,112.8,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_603,112.8,ppg_dropout,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_603,112.8,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_603,112.8,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_603,112.8,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_977,59.8,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_977,59.8,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_977,59.8,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_977,59.8,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_977,59.8,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_977,59.8,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_787,35.0,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_787,35.0,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_787,35.0,ppg_dropout,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_787,35.0,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_787,35.0,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_787,35.0,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_667,95.2,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_667,95.2,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_667,95.2,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_667,95.2,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_667,95.2,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_667,95.2,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_704,81.6,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_704,81.6,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_704,81.6,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_704,81.6,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_704,81.6,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_704,81.6,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_798,99.4,clean,usable,ok,ppg_ecg_abp_intervention,True,
+synthetic_798,99.4,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_798,99.4,ppg_dropout,abstain,ok,ppg_ecg_abp_intervention,False,
+synthetic_798,99.4,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_798,99.4,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_798,99.4,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp_intervention,True,ecg appears flatlined
+synthetic_4868,109.5,clean,usable,ok,ppg_ecg_abp_intervention,True,
+synthetic_4868,109.5,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_4868,109.5,ppg_dropout,abstain,ok,ppg_ecg_abp_intervention,False,
+synthetic_4868,109.5,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4868,109.5,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4868,109.5,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp_intervention,True,ecg appears flatlined
+synthetic_4984,87.3,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_4984,87.3,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_4984,87.3,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_4984,87.3,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4984,87.3,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4984,87.3,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_500,150.3,clean,usable,ok,ppg_ecg_abp_intervention,True,
+synthetic_500,150.3,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_500,150.3,ppg_dropout,abstain,ok,ppg_ecg_abp_intervention,False,
+synthetic_500,150.3,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_500,150.3,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_500,150.3,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp_intervention,True,ecg appears flatlined
+synthetic_4988,37.6,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_4988,37.6,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_4988,37.6,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_4988,37.6,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4988,37.6,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4988,37.6,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_963,54.8,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_963,54.8,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_963,54.8,ppg_dropout,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_963,54.8,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_963,54.8,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_963,54.8,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_4775,65.2,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_4775,65.2,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_4775,65.2,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_4775,65.2,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4775,65.2,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4775,65.2,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_4941,130.0,clean,usable,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4941,130.0,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_4941,130.0,ppg_dropout,abstain,low_confidence,ppg_ecg,False,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4941,130.0,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4941,130.0,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4941,130.0,ecg_flatline,ecg_dropped,low_confidence,ppg_only,True,ecg appears flatlined | ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_655,111.1,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_655,111.1,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_655,111.1,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_655,111.1,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_655,111.1,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_655,111.1,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_4876,42.0,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_4876,42.0,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_4876,42.0,ppg_dropout,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_4876,42.0,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4876,42.0,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4876,42.0,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_725,125.4,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_725,125.4,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_725,125.4,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_725,125.4,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_725,125.4,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_725,125.4,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_639,129.6,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_639,129.6,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_639,129.6,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_639,129.6,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_639,129.6,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_639,129.6,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_498,129.4,clean,usable,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_498,129.4,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_498,129.4,ppg_dropout,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_498,129.4,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_498,129.4,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_498,129.4,ecg_flatline,ecg_dropped,low_confidence,ppg_only,True,ecg appears flatlined | ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_832,22.1,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_832,22.1,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_832,22.1,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_832,22.1,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_832,22.1,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_832,22.1,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_646,42.9,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_646,42.9,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_646,42.9,ppg_dropout,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_646,42.9,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_646,42.9,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_646,42.9,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_658,148.8,clean,usable,ok,ppg_ecg_abp_intervention,True,
+synthetic_658,148.8,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_658,148.8,ppg_dropout,abstain,ok,ppg_ecg_abp_intervention,False,
+synthetic_658,148.8,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_658,148.8,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_658,148.8,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp_intervention,True,ecg appears flatlined
+synthetic_4841,146.3,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_4841,146.3,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_4841,146.3,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_4841,146.3,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4841,146.3,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4841,146.3,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_960,41.9,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_960,41.9,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_960,41.9,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_960,41.9,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_960,41.9,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_960,41.9,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_753,95.5,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_753,95.5,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_753,95.5,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_753,95.5,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_753,95.5,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_753,95.5,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_597,74.5,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_597,74.5,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_597,74.5,ppg_dropout,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_597,74.5,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_597,74.5,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_597,74.5,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_953,13.2,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_953,13.2,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_953,13.2,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_953,13.2,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_953,13.2,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_953,13.2,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_4830,53.7,clean,usable,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4830,53.7,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_4830,53.7,ppg_dropout,abstain,low_confidence,ppg_ecg,False,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4830,53.7,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4830,53.7,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4830,53.7,ecg_flatline,ecg_dropped,low_confidence,ppg_only,True,ecg appears flatlined | ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_822,52.0,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_822,52.0,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_822,52.0,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_822,52.0,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_822,52.0,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_822,52.0,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_4960,152.5,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_4960,152.5,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_4960,152.5,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_4960,152.5,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4960,152.5,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4960,152.5,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_4977,101.1,clean,usable,ok,ppg_ecg_abp_intervention,True,
+synthetic_4977,101.1,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_4977,101.1,ppg_dropout,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_4977,101.1,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4977,101.1,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4977,101.1,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp_intervention,True,ecg appears flatlined
+synthetic_882,37.5,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_882,37.5,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_882,37.5,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_882,37.5,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_882,37.5,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_882,37.5,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_796,76.3,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_796,76.3,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_796,76.3,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_796,76.3,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_796,76.3,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_796,76.3,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_4796,86.4,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_4796,86.4,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_4796,86.4,ppg_dropout,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_4796,86.4,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4796,86.4,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4796,86.4,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_955,108.8,clean,usable,ok,ppg_ecg_abp_intervention,True,
+synthetic_955,108.8,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_955,108.8,ppg_dropout,abstain,ok,ppg_ecg_abp_intervention,False,
+synthetic_955,108.8,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_955,108.8,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_955,108.8,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp_intervention,True,ecg appears flatlined
+synthetic_808,92.5,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_808,92.5,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_808,92.5,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_808,92.5,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_808,92.5,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_808,92.5,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_917,75.3,clean,usable,ok,ppg_ecg_abp_intervention,True,
+synthetic_917,75.3,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_917,75.3,ppg_dropout,abstain,ok,ppg_ecg_abp_intervention,False,
+synthetic_917,75.3,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_917,75.3,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_917,75.3,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp_intervention,True,ecg appears flatlined
+synthetic_745,58.2,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_745,58.2,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_745,58.2,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_745,58.2,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_745,58.2,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_745,58.2,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_4819,99.1,clean,usable,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4819,99.1,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_4819,99.1,ppg_dropout,abstain,low_confidence,ppg_ecg,False,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4819,99.1,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4819,99.1,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4819,99.1,ecg_flatline,ecg_dropped,low_confidence,ppg_only,True,ecg appears flatlined | ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_845,161.3,clean,usable,ok,ppg_ecg_abp_intervention,True,
+synthetic_845,161.3,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_845,161.3,ppg_dropout,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_845,161.3,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_845,161.3,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_845,161.3,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp_intervention,True,ecg appears flatlined
+synthetic_615,95.7,clean,usable,ok,ppg_ecg_abp_intervention,True,
+synthetic_615,95.7,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_615,95.7,ppg_dropout,abstain,ok,ppg_ecg_abp_intervention,False,
+synthetic_615,95.7,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_615,95.7,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_615,95.7,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp_intervention,True,ecg appears flatlined
+synthetic_566,147.5,clean,usable,ok,ppg_ecg_abp_intervention,True,
+synthetic_566,147.5,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_566,147.5,ppg_dropout,abstain,ok,ppg_ecg_abp_intervention,False,
+synthetic_566,147.5,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_566,147.5,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_566,147.5,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp_intervention,True,ecg appears flatlined
+synthetic_579,12.4,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_579,12.4,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_579,12.4,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_579,12.4,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_579,12.4,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_579,12.4,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_4949,41.5,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_4949,41.5,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_4949,41.5,ppg_dropout,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_4949,41.5,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4949,41.5,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4949,41.5,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_782,144.0,clean,usable,ok,ppg_ecg_abp_intervention,True,
+synthetic_782,144.0,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_782,144.0,ppg_dropout,abstain,ok,ppg_ecg_abp_intervention,False,
+synthetic_782,144.0,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_782,144.0,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_782,144.0,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp_intervention,True,ecg appears flatlined
+synthetic_555,98.3,clean,usable,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_555,98.3,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_555,98.3,ppg_dropout,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_555,98.3,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_555,98.3,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_555,98.3,ecg_flatline,ecg_dropped,low_confidence,ppg_only,True,ecg appears flatlined | ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_549,85.6,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_549,85.6,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_549,85.6,ppg_dropout,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_549,85.6,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_549,85.6,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_549,85.6,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_4824,67.2,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_4824,67.2,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_4824,67.2,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_4824,67.2,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4824,67.2,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4824,67.2,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_4861,55.8,clean,usable,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4861,55.8,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_4861,55.8,ppg_dropout,abstain,low_confidence,ppg_ecg,False,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4861,55.8,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4861,55.8,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4861,55.8,ecg_flatline,ecg_dropped,low_confidence,ppg_only,True,ecg appears flatlined | ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_557,115.2,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_557,115.2,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_557,115.2,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_557,115.2,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_557,115.2,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_557,115.2,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_4904,66.7,clean,usable,ok,ppg_ecg_abp,True,
+synthetic_4904,66.7,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_4904,66.7,ppg_dropout,abstain,ok,ppg_ecg_abp,False,
+synthetic_4904,66.7,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4904,66.7,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4904,66.7,ecg_flatline,ecg_dropped,low_confidence,ppg_ecg_abp,True,ecg appears flatlined
+synthetic_513,77.5,clean,usable,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_513,77.5,ppg_flatline,abstain,abstained,none,True,ppg appears flatlined | PPG quality is too poor for prediction.
+synthetic_513,77.5,ppg_dropout,abstain,low_confidence,ppg_ecg,False,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_513,77.5,abp_line_flush,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_513,77.5,abp_damped,abp_dropped,low_confidence,ppg_ecg,True,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_513,77.5,ecg_flatline,ecg_dropped,low_confidence,ppg_only,True,ecg appears flatlined | ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4938,70.0,genuine_shock,abp_retained,low_confidence,ppg_ecg,False,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4867,95.0,genuine_shock,abp_retained,ok,ppg_ecg_abp,True,
+synthetic_843,75.0,genuine_shock,abp_retained,ok,ppg_ecg_abp,True,
+synthetic_4979,10.0,genuine_shock,abp_retained,ok,ppg_ecg_abp,True,
+synthetic_4871,55.0,genuine_shock,abp_retained,low_confidence,ppg_ecg,False,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_842,90.0,genuine_shock,abp_retained,low_confidence,ppg_ecg,False,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_678,45.0,genuine_shock,abp_retained,ok,ppg_ecg_abp,True,
+synthetic_576,80.0,genuine_shock,abp_retained,low_confidence,ppg_ecg,False,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_563,60.0,genuine_shock,abp_retained,ok,ppg_ecg_abp,True,
+synthetic_919,90.0,genuine_shock,abp_retained,low_confidence,ppg_ecg,False,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4973,70.0,genuine_shock,abp_retained,low_confidence,ppg_ecg,False,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_618,80.0,genuine_shock,abp_retained,ok,ppg_ecg_abp,True,
+synthetic_990,80.0,genuine_shock,abp_retained,low_confidence,ppg_ecg,False,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_499,90.0,genuine_shock,abp_retained,ok,ppg_ecg_abp,True,
+synthetic_881,65.0,genuine_shock,abp_retained,low_confidence,ppg_ecg,False,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4937,70.0,genuine_shock,abp_retained,ok,ppg_ecg_abp,True,
+synthetic_4959,65.0,genuine_shock,abp_retained,ok,ppg_ecg_abp,True,
+synthetic_724,70.0,genuine_shock,abp_retained,ok,ppg_ecg_abp,True,
+synthetic_821,85.0,genuine_shock,abp_retained,low_confidence,ppg_ecg,False,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_877,75.0,genuine_shock,abp_retained,low_confidence,ppg_ecg,False,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_731,15.0,genuine_shock,abp_retained,ok,ppg_ecg_abp,True,
+synthetic_4878,70.0,genuine_shock,abp_retained,low_confidence,ppg_ecg,False,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_752,85.0,genuine_shock,abp_retained,low_confidence,ppg_ecg,False,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_654,60.0,genuine_shock,abp_retained,low_confidence,ppg_ecg,False,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_986,85.0,genuine_shock,abp_retained,low_confidence,ppg_ecg,False,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_758,70.0,genuine_shock,abp_retained,low_confidence,ppg_ecg_abp,True,Forecast is outside expected physiologic ABP range.
+synthetic_4941,75.0,genuine_shock,abp_retained,low_confidence,ppg_ecg,False,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4888,60.0,genuine_shock,abp_retained,low_confidence,ppg_ecg,False,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_520,65.0,genuine_shock,abp_retained,ok,ppg_ecg_abp,True,
+synthetic_745,70.0,genuine_shock,abp_retained,ok,ppg_ecg_abp,True,
+synthetic_619,90.0,genuine_shock,abp_retained,ok,ppg_ecg_abp,True,
+synthetic_737,100.0,genuine_shock,abp_retained,ok,ppg_ecg_abp,True,
+synthetic_4846,75.0,genuine_shock,abp_retained,low_confidence,ppg_ecg,False,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_4976,55.0,genuine_shock,abp_retained,ok,ppg_ecg_abp,True,
+synthetic_682,80.0,genuine_shock,abp_retained,ok,ppg_ecg_abp,True,
+synthetic_4843,70.0,genuine_shock,abp_retained,ok,ppg_ecg_abp,True,
+synthetic_975,70.0,genuine_shock,abp_retained,low_confidence,ppg_ecg,False,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_923,65.0,genuine_shock,abp_retained,low_confidence,ppg_ecg,False,ABP failed runtime physiology/spike checks; ABP channel will be ignored.
+synthetic_933,75.0,genuine_shock,abp_retained,ok,ppg_ecg_abp,True,
+synthetic_555,85.0,genuine_shock,abp_retained,ok,ppg_ecg_abp,True,

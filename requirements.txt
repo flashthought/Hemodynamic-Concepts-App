@@ -1,0 +1,10 @@
+# Runtime (the app). Versions are the ones verified in evaluation/results/.
+numpy==2.5.3
+torch==2.11.0
+scipy==1.18.1
+pandas==3.0.6
+tqdm
+# Verification, figures and UI tests only (not needed to run the app)
+scikit-learn
+matplotlib==3.11.2
+playwright

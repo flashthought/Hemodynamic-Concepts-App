@@ -1,0 +1,295 @@
+{
+  "description": "Design FMEA / ISO 14971 risk analysis (BME Design Section 8.9). Risk = probability x severity. Severity scale: Table 8.3 (1 Negligible, 3 Minor, 5 Serious, 9 Critical, 10 Catastrophic). Probability levels and acceptability regions: Figure 8.13 (Frequent, Likely, Occasional, Remote, Unlikely). Probabilities BEFORE control are estimated from verification measurements where one exists (evidence field), otherwise by design-team judgement (marked 'judgement'), as the book allows for academic projects. 'planned' controls are not yet implemented and are not counted as verified.",
+  "severity_scale": {
+    "Negligible": 1,
+    "Minor": 3,
+    "Serious": 5,
+    "Critical": 9,
+    "Catastrophic": 10
+  },
+  "probability_scale": {
+    "Unlikely": 1,
+    "Remote": 2,
+    "Occasional": 3,
+    "Likely": 4,
+    "Frequent": 5
+  },
+  "acceptability": {
+    "note": "Regions reconstructed from BME Design Figure 8.13 (U = unacceptable, A = ALARP, B = broadly acceptable). Columns: Negligible, Minor, Serious, Critical, Catastrophic.",
+    "Frequent": [
+      "A",
+      "A",
+      "U",
+      "U",
+      "U"
+    ],
+    "Likely": [
+      "B",
+      "A",
+      "U",
+      "U",
+      "U"
+    ],
+    "Occasional": [
+      "B",
+      "B",
+      "A",
+      "A",
+      "U"
+    ],
+    "Remote": [
+      "B",
+      "B",
+      "B",
+      "A",
+      "U"
+    ],
+    "Unlikely": [
+      "B",
+      "B",
+      "B",
+      "A",
+      "A"
+    ]
+  },
+  "risks": [
+    {
+      "id": "R-01",
+      "concepts": "A, B, C",
+      "item": "Signal-quality gate",
+      "failure_mode": "PPG drop-out (sensor off / motion) passes the Version 5 gate because the gate checks data after interpolation",
+      "effect": "Forecast built from interpolated, fabricated waveform; false reassurance or false alarm",
+      "severity": "Critical",
+      "p_before": "Likely",
+      "evidence_before": "Version 5 alone handled only 24% of 40% PPG drop-out windows (quality_gate_before_rc07.csv)",
+      "controls": [
+        "RC-07 raw-signal pre-check before interpolation (abstain if PPG > 30% missing; drop ECG/ABP channel if > 30% missing)",
+        "SIGNAL CHECK technical alarm, never a physiological alert, when abstaining"
+      ],
+      "control_type": "design change",
+      "status": "implemented + verified",
+      "p_after": "Unlikely",
+      "evidence_after": "100% of 595 corrupted windows handled; 0 physiological alerts from abstained windows (quality_gate.csv)"
+    },
+    {
+      "id": "R-02",
+      "concepts": "A",
+      "item": "ABP plausibility check (hazard H-09)",
+      "failure_mode": "Version 5 rejects genuine arterial pressure in profound shock (MAP < 40 or DBP < 20 treated as artefact) and silently falls back to the less accurate ECG + PPG regime",
+      "effect": "Forecast jumps upward (e.g. 68 vs true 42 mmHg); CRITICAL alert downgraded to WATCH during the most dangerous period",
+      "severity": "Critical",
+      "p_before": "Frequent",
+      "evidence_before": "Under-alert in 53% of true MAP < 55 time; ABP rejected 54% (90 shock patients, Version 5 baseline)",
+      "controls": [
+        "RC-09 shock-aware ABP check: reject only true artefacts (flat line, steps, zero pulse pressure, impossible values)",
+        "RC-10 measured-pressure floor: alert level never below what the measured arterial MAP itself indicates",
+        "RC-08 fail-safe hold: a lower-confidence estimate can never de-escalate an alert"
+      ],
+      "control_type": "design change",
+      "status": "implemented + verified",
+      "p_after": "Unlikely",
+      "evidence_after": "Under-alert 0.18% (shock cohort) / 0.3% (all test patients); ABP rejected 1.2%; genuine-shock ABP retained 95%; damped/flush artefacts still rejected 100%"
+    },
+    {
+      "id": "R-03",
+      "concepts": "A, B",
+      "item": "Alert state machine",
+      "failure_mode": "Alert de-escalates when the higher-confidence channel is lost rather than when the patient improves",
+      "effect": "False reassurance",
+      "severity": "Critical",
+      "p_before": "Occasional",
+      "evidence_before": "41 unsafe de-escalations in the shock cohort (Version 5 baseline)",
+      "controls": [
+        "RC-08 fail-safe hold with 'held' indicator on screen",
+        "3-update de-escalation persistence with 2 mmHg hysteresis"
+      ],
+      "control_type": "design change",
+      "status": "implemented + verified",
+      "p_after": "Unlikely",
+      "evidence_after": "0 unsafe de-escalations"
+    },
+    {
+      "id": "R-04",
+      "concepts": "B",
+      "item": "Non-invasive forecast",
+      "failure_mode": "ECG + PPG estimate of MAP is biased and imprecise (no pressure reference)",
+      "effect": "Missed hypotension (false reassurance) or false alarms",
+      "severity": "Critical",
+      "p_before": "Frequent",
+      "evidence_before": "MAE 18.8 mmHg simulated / 12.6 real; AUROC 0.67 / 0.59",
+      "controls": [
+        "Confidence cap: low-confidence estimate can raise at most WATCH",
+        "Labelling: 'trend only - not for treatment decisions'",
+        "Domain-specific bias calibration"
+      ],
+      "control_type": "design change + warning",
+      "status": "implemented + verified",
+      "p_after": "Frequent",
+      "evidence_after": "Cap removes false alarms but under-alert during true MAP < 55 is 100%: the risk cannot be reduced to ALARP with the current model -> Concept B not selected (Section 8.9.2: 'the design must be abandoned' or redesigned)"
+    },
+    {
+      "id": "R-05",
+      "concepts": "A",
+      "item": "Alarm management",
+      "failure_mode": "Frequent WATCH-level alerts on real patients",
+      "effect": "Alarm fatigue; a true alarm is ignored (Sendelbach & Funk 2013)",
+      "severity": "Serious",
+      "p_before": "Likely",
+      "evidence_before": "12.6 false alarm episodes per hour at any level on real data (5.5 for a conventional monitor); 3.3/h at DETERIORATING or above",
+      "controls": [
+        "Persistence (2 updates) and hysteresis (implemented)",
+        "IEC 60601-1-8 priorities: WATCH = low priority, visual only (implemented in colour/shape coding)",
+        "PLANNED: make WATCH a non-alarming information signal and tune the WATCH threshold on validation data"
+      ],
+      "control_type": "design change",
+      "status": "partially implemented",
+      "p_after": "Occasional",
+      "evidence_after": "ALARP pending the planned control and usability validation; tracked as SPEC-04 FAIL"
+    },
+    {
+      "id": "R-06",
+      "concepts": "A, C",
+      "item": "Intervention response",
+      "failure_mode": "Vasopressor and fluid given together; combined input channel cannot separate their effects",
+      "effect": "Response attributed to the wrong treatment",
+      "severity": "Serious",
+      "p_before": "Occasional",
+      "evidence_before": "Version 5 encodes all treatments in one channel",
+      "controls": [
+        "Event-log driven tracker (clinician-confirmed events)",
+        "Confounding flag shown when treatments overlap",
+        "Status reports a trend only, never a recommendation"
+      ],
+      "control_type": "design change + warning",
+      "status": "implemented + verified",
+      "p_after": "Remote",
+      "evidence_after": "96% agreement with ground truth on unconfounded events (intervention_agreement.csv)"
+    },
+    {
+      "id": "R-07",
+      "concepts": "A, B, C",
+      "item": "R / C estimation",
+      "failure_mode": "Real-data fine-tuning eroded vascular-state estimates (within-patient correlation R 0.54, C 0.03)",
+      "effect": "Clinician over-interprets an unreliable resistance/compliance value",
+      "severity": "Serious",
+      "p_before": "Likely",
+      "evidence_before": "SPEC-08 FAIL",
+      "controls": [
+        "Displayed as relative trends with an on-screen caveat",
+        "Not used by the alert logic",
+        "PLANNED: multi-task fine-tuning that preserves R/C"
+      ],
+      "control_type": "warning",
+      "status": "implemented (warning only)",
+      "p_after": "Occasional",
+      "evidence_after": "ALARP for a research prototype; must be fixed before clinical use"
+    },
+    {
+      "id": "R-08",
+      "concepts": "A, B, C",
+      "item": "Output wording",
+      "failure_mode": "Software text drifts into recommending therapy",
+      "effect": "Device becomes prescriptive (changes regulatory class; automation bias)",
+      "severity": "Critical",
+      "p_before": "Remote",
+      "evidence_before": "judgement",
+      "controls": [
+        "Outputs restricted to observations and trends",
+        "Automated wording scan of every alert reason and review narrative (static_checks.py, SPEC-14)"
+      ],
+      "control_type": "design change",
+      "status": "implemented + verified",
+      "p_after": "Unlikely",
+      "evidence_after": "0 prescriptive phrases (static_checks.json)"
+    },
+    {
+      "id": "R-09",
+      "concepts": "A, B",
+      "item": "Computation",
+      "failure_mode": "Update latency exceeds the 1 s update period on bedside CPU hardware",
+      "effect": "Stale display",
+      "severity": "Serious",
+      "p_before": "Remote",
+      "evidence_before": "judgement",
+      "controls": [
+        "CPU latency verified (p95 175 ms)",
+        "Latency shown per update; clock shows playback position"
+      ],
+      "control_type": "design change",
+      "status": "implemented + verified",
+      "p_after": "Unlikely",
+      "evidence_after": "SPEC-10 PASS (marginal)"
+    },
+    {
+      "id": "R-10",
+      "concepts": "A",
+      "item": "Domain shift",
+      "failure_mode": "Calibration fitted on simulation does not transfer to real patients",
+      "effect": "Mis-calibrated uncertainty band and risk score",
+      "severity": "Serious",
+      "p_before": "Likely",
+      "evidence_before": "Simulation bias -9.0 mmHg vs real -2.4 mmHg in the intervention regime (calibration.json)",
+      "controls": [
+        "Domain-specific calibration fitted on VitalDB validation cases only"
+      ],
+      "control_type": "design change",
+      "status": "implemented + verified",
+      "p_after": "Remote",
+      "evidence_after": "Real MAE 5.6 -> 4.7 mmHg after calibration (held-out test cases)"
+    },
+    {
+      "id": "R-11",
+      "concepts": "C",
+      "item": "Retrospective report",
+      "failure_mode": "Report used as a real-time monitor",
+      "effect": "Delayed response to deterioration",
+      "severity": "Serious",
+      "p_before": "Remote",
+      "evidence_before": "judgement",
+      "controls": [
+        "Banner on every report: retrospective decision-support summary, not a diagnosis",
+        "No alarm colours in report header"
+      ],
+      "control_type": "warning",
+      "status": "implemented",
+      "p_after": "Unlikely",
+      "evidence_after": "inspection"
+    },
+    {
+      "id": "R-12",
+      "concepts": "A, B, C",
+      "item": "Patient identification",
+      "failure_mode": "Wrong recording reviewed or monitored",
+      "effect": "Decisions made on another patient's data",
+      "severity": "Critical",
+      "p_before": "Remote",
+      "evidence_before": "judgement",
+      "controls": [
+        "Recording title and source always shown in page header and report",
+        "Changing patient resets the session"
+      ],
+      "control_type": "design change",
+      "status": "implemented",
+      "p_after": "Unlikely",
+      "evidence_after": "inspection"
+    },
+    {
+      "id": "R-13",
+      "concepts": "A, B, C",
+      "item": "Configuration control",
+      "failure_mode": "Unverified model weights loaded (wrong file, corrupted copy, or Version 5's silent fallback to the synthetic-only checkpoint)",
+      "effect": "All verification evidence is void; real-patient MAE of the synthetic-only model is ~5x worse",
+      "severity": "Critical",
+      "p_before": "Remote",
+      "evidence_before": "Version 5 predictor falls back to physics-informed_model.pth if the fine-tuned file is missing (judgement)",
+      "controls": [
+        "SHA-256 of the loaded checkpoint compared with the verified value at start-up; mismatch refuses to start",
+        "Checksum shown in the app header and stored in every result file"
+      ],
+      "control_type": "design change",
+      "status": "implemented + verified",
+      "p_after": "Unlikely",
+      "evidence_after": "Tested: correct checkpoint loads; wrong expected hash -> RuntimeError, server does not start"
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "model_version": "physics-informed-hemo-local",
+  "model_path": "data/models/physics-informed_real_finetuned.pth",
+  "created_utc": "2026-09-27T01:36:02.851761+00:00",
+  "target_fs": 125.0,
+  "window_sec": 10.0,
+  "window_samples": 1250,
+  "forecast_horizon_steps": 15,
+  "forecast_step_sec": 1.0,
+  "required_channels": [
+    "ppg"
+  ],
+  "optional_channels": [
+    "ecg",
+    "abp",
+    "intervention"
+  ],
+  "outputs": [
+    "forecast_abp",
+    "forecast_map",
+    "r_estimate",
+    "c_estimate",
+    "quality",
+    "warnings"
+  ],
+  "intended_use": "Research decision-support component for short-horizon hemodynamic trend forecasting from patient-monitor waveforms. Not an autonomous diagnostic or treatment-prescribing device.",
+  "checkpoint_path": "data/models/physics-informed_real_finetuned.pth",
+  "deployment_exports": {
+    "torchscript": "data/models/deployment/physics_informed_hemo.pt",
+    "onnx": "data/models/deployment/physics_informed_hemo.onnx"
+  },
+  "deployment_input_order": [
+    "ecg",
+    "ppg",
+    "abp",
+    "intervention"
+  ],
+  "deployment_output_order": [
+    "forecast_abp",
+    "R",
+    "C"
+  ],
+  "deployment_input_shape": [
+    1,
+    1,
+    1250
+  ],
+  "deployment_output_forecast_steps": 15
+}

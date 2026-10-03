@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hemodynamic Concepts App</title>
+  <link rel="stylesheet" href="/static/css/app.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230b3954'/%3E%3Cpath d='M3 18h7l3-9 4 15 3-9h9' fill='none' stroke='%2300e5ff' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="topbar">
+    <div class="brand">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="6" fill="#0b3954"/><path d="M3 18h7l3-9 4 15 3-9h9" fill="none" stroke="#00e5ff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div>
+        <div class="brand-title">Hemodynamic Decision Support</div>
+        <div class="brand-sub">Physics-informed model · Version 5</div>
+      </div>
+    </div>
+    <nav class="nav" aria-label="Main">
+      <a href="#/" data-route="/">Overview</a>
+      <a href="#/concept-a" data-route="/concept-a"><span class="tag">A</span> Integrated Monitor</a>
+      <a href="#/concept-b" data-route="/concept-b"><span class="tag">B</span> Non-Invasive</a>
+      <a href="#/concept-c" data-route="/concept-c"><span class="tag">C</span> Episode Review</a>
+      <a href="#/evidence" data-route="/evidence">Evidence</a>
+      <a href="#/design" data-route="/design">Design File</a>
+    </nav>
+    <div class="model-badge" id="model-badge" title="Model in use">loading model…</div>
+  </header>
+
+  <div class="intended-use" role="note">
+    <strong>Research prototype · Clinical decision support only.</strong>
+    Alerts and trends support bedside review; they do not diagnose or recommend treatment.
+    All treatment decisions remain with the clinical team.
+  </div>
+
+  <main id="main" tabindex="-1"></main>
+
+  <footer class="footer">
+    Hemodynamic Concepts App · BME design project · Data: held-out simulation and de-identified cases from the
+    <a href="https://vitaldb.net/dataset/" rel="noopener">VitalDB open dataset</a> (Lee et al., Sci Data 2022) ·
+    <a href="#/design">Design History File</a>
+  </footer>
+
+  <script type="module" src="/static/js/main.js"></script>
+</body>
+</html>

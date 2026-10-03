@@ -1,0 +1,16 @@
+id,need,metric,unit,ideal,marginal,measured_A,result_A,measured_B,result_B,measured_C,result_C
+SPEC-01,Accurate short-horizon pressure forecast,MAE of forecast MAP vs true MAP over the next 15 s (held-out synthetic),mmHg,5.0,10.0,4.525,PASS (ideal),18.802,FAIL,4.525,PASS (ideal)
+SPEC-02,Detect deterioration before it is missed,Sensitivity of DETERIORATING-or-higher alert for true future MAP < 65 mmHg,fraction,0.9,0.8,0.9633,PASS (ideal),0.0,FAIL,0.0,FAIL
+SPEC-03,Do not alarm on stable patients,Specificity of DETERIORATING-or-higher alert,fraction,0.9,0.8,0.9363,PASS (ideal),1.0,PASS (ideal),0.9363,PASS (ideal)
+SPEC-04,Limit alarm fatigue,False alert episodes per monitored patient-hour,per hour,1.0,3.0,8.791,FAIL,2.088,PASS (marginal),0.0,PASS (ideal)
+SPEC-05,Warn earlier than a conventional monitor,"Median paired lead-time advantage of the first WATCH-or-higher alert over a conventional threshold monitor with identical alarm management, per hypotension onset (MAP < 65)",s,10.0,0.0,2.0,PASS (marginal),2.5,PASS (marginal),,n/a
+SPEC-06,Risk estimate separates patients who will and will not become hypotensive,AUROC of P(MAP < 65) for true future MAP < 65,AUROC,0.9,0.8,0.9847,PASS (ideal),0.6744,FAIL,0.9847,PASS (ideal)
+SPEC-07,Never alert from unusable signals,Corrupted windows handled safely (abstain or drop the bad channel),fraction,1.0,0.95,1.0,PASS (ideal),1.0,PASS (ideal),1.0,PASS (ideal)
+SPEC-08,Track the patient's vascular state,Median within-patient correlation of estimated R and C with ground truth,r,0.8,0.5,0.0324,FAIL,0.052,FAIL,0.0324,FAIL
+SPEC-09,Show whether treatment is working,Agreement of intervention-response status with ground truth,fraction,0.9,0.75,0.961,PASS (ideal),,n/a,0.961,PASS (ideal)
+SPEC-10,Real-time operation at the bedside,95th-percentile per-update latency on CPU (no GPU at bedside),ms,100.0,1000.0,175.05,PASS (marginal),175.05,PASS (marginal),175.05,PASS (marginal)
+SPEC-11,"Works on real patients, not only simulations",MAE of forecast MAP vs arterial line on held-out VitalDB cases,mmHg,10.0,15.0,4.695,PASS (ideal),12.588,PASS (marginal),4.695,PASS (ideal)
+SPEC-12,Interpretable at a glance,Nielsen usability heuristics satisfied (heuristic evaluation),of 10,10,8,9,PASS (marginal),9,PASS (marginal),10,PASS (ideal)
+SPEC-13,"Support handoff, audit and quality review",Exportable episode report (printable + data export),yes/no,True,True,False,FAIL,False,FAIL,True,PASS (ideal)
+SPEC-14,"Remain decision support, never prescribe therapy",Outputs containing treatment recommendations,count,0,0,0,PASS (ideal),0,PASS (ideal),0,PASS (ideal)
+SPEC-15,Never falsely reassure during critical hypotension,Share of windows with true MAP < 55 mmHg displayed only as STABLE or WATCH,fraction,0.0,0.05,0.003,PASS (marginal),1.0,FAIL,,n/a
