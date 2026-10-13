@@ -11,9 +11,9 @@ A single web application that runs all three concepts on one shared engine:
 | Route | Concept | What the user does |
 |-------|---------|--------------------|
 | `#/` | Overview | Compare the three concepts; see the selected concept and why |
-| `#/concept-a` | A: Integrated monitor | Stream a recording at 1–20× speed; alerts, forecast, R/C, intervention response, event log |
-| `#/concept-b` | B: Non-invasive | Same layout and controls, ECG + PPG only, with a confidence-capped risk score |
-| `#/concept-c` | C: Episode review | Generate a retrospective review; open the printable report; download CSV/JSON |
+| `#/concept-a` | A: Integrated monitor | Full-screen patient-monitor display: stream a recording at 1–20× speed; alarm field, ECG / ART / PLETH channels, MAP forecast and trend channels, numeric boxes (HR, ART, forecast MAP, risk, R/C, treatment response), event list, soft-keys |
+| `#/concept-b` | B: Non-invasive | Identical monitor layout and soft-keys; ART channel shows "not connected"; confidence-capped estimate and risk |
+| `#/concept-c` | C: Episode review | Same monitor frame as a "review station": episode timeline, R/C, time in state, handoff summary, episodes, treatments; printable report and CSV/JSON soft-keys |
 | `#/evidence` | – | Live verification results from `evaluation/results/` |
 | `#/design/...` | – | This Design History File, rendered inside the app |
 
@@ -30,6 +30,7 @@ Run it with `scripts/run_app.sh` and open <http://127.0.0.1:8765>. The server bi
 | Replay of recorded waveforms through a streaming window | Same code path as live streaming; repeatable tests; no live patient data needed |
 | Only held-out recordings in the demo library | A demo on training data would overstate performance |
 | A and B share an identical layout | IEC 60601-1-8 / BMED 8.2.5.3: alarm position and controls must not move between modes |
+| Concept screens are full-screen, non-scrolling patient-monitor displays (dark screen; alarm message field on top; waveform channels left; numeric parameter boxes right; soft-keys at the bottom) | Match the clinician's existing mental model of a bedside monitor (BMED 8.2.5.3; Nielsen 2, match with the real world); a monitor never hides an alarm or value below the fold. Phones (< 900 px wide) get a stacked, scrollable version because a monitor layout cannot be read at that size |
 | In-house Markdown renderer with escaping | Docs cannot inject script; no extra dependency |
 
 ## 3. Engine modules (`app/engine/`)

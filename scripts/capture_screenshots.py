@@ -35,7 +35,7 @@ async def main():
         sel = pg.locator("select").first
         await sel.select_option("vitaldb_6131")
         await pg.get_by_text("Generate review").click()
-        await pg.wait_for_selector("text=Open printable report", timeout=120000); await pg.wait_for_timeout(800)
+        await pg.wait_for_selector("text=Printable report", timeout=120000); await pg.wait_for_timeout(800)
         await pg.screenshot(path=OUT + "ui05_concept_c.png", full_page=True)
         await pg.goto(BASE + "#/evidence"); await pg.wait_for_timeout(1500)
         await pg.screenshot(path=OUT + "ui06_evidence.png", full_page=True)

@@ -17,6 +17,8 @@ async function route() {
     a.classList.toggle("active", r === "/" ? hash === "/" : hash.startsWith(r));
     a.toggleAttribute("aria-current", a.classList.contains("active"));
   });
+  // Concept screens are full-screen, non-scrolling patient-monitor displays.
+  document.body.classList.toggle("monitor-mode", ["concept-a", "concept-b", "concept-c"].includes(page));
   try {
     if (!meta) meta = await api("/api/meta");
     if (page === "concept-a") dispose = mountLive(main, "A", meta);

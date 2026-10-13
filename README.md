@@ -33,8 +33,7 @@ On Vercel, import the GitHub repo and set **Root Directory = `site`**, **Framewo
 ## Pages
 
 - **Overview:** the three concepts, scores and the selection.
-- **Integrated Monitor / Non-Invasive:** pick a patient, press Play (Space), step (→), speed 1–20×. Tick *Verification overlay* to see the true future MAP (not available at the bedside).
-- **Episode Review:** pick an episode, then *Generate review*, then open the printable report or download CSV/JSON.
+- **Concepts A, B and C** open as full-screen patient-monitor displays (no scrolling on laptop and desktop screens). Choose the bed/patient at the top; use the soft-keys at the bottom: Play (Space), Step (→), speed 1–20×, *Verification overlay* (true future MAP, not available at the bedside), *? Alarms* (alert rules), and A / B / C to switch concept. *☰ Menu* returns to the overview.
 - **Evidence:** the live verification tables.
 - **Design File:** the Design History File (docs 00–09), readable in the app.
 

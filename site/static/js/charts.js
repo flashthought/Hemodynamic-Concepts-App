@@ -1,10 +1,13 @@
 // Small, dependency-free canvas charts (no CDN: works offline on a hospital network).
 
+// cssHeight "fill": the canvas is sized by CSS (absolutely positioned inside a
+// grid cell), so it takes the cell's size - used by the full-screen monitor.
 function setup(canvas, cssHeight) {
   const dpr = window.devicePixelRatio || 1;
+  const fill = cssHeight === "fill";
   const w = Math.max(50, canvas.clientWidth || canvas.parentElement.clientWidth);
-  const h = cssHeight || canvas.clientHeight || 160;
-  canvas.style.height = `${h}px`;
+  const h = fill ? Math.max(30, canvas.clientHeight) : (cssHeight || canvas.clientHeight || 160);
+  if (!fill) canvas.style.height = `${h}px`;
   canvas.width = Math.round(w * dpr);
   canvas.height = Math.round(h * dpr);
   const ctx = canvas.getContext("2d");
@@ -20,8 +23,8 @@ function percentile(sorted, p) {
 }
 
 // Bedside-monitor style waveform strip (last 10 s).
-export function drawStrip(canvas, values, colour, { fixed = null, unit = "" } = {}) {
-  const { ctx, w, h } = setup(canvas, 74);
+export function drawStrip(canvas, values, colour, { fixed = null, unit = "", height = 74 } = {}) {
+  const { ctx, w, h } = setup(canvas, height);
   ctx.strokeStyle = "#16232d";
   ctx.lineWidth = 1;
   for (let i = 1; i < 10; i++) {
@@ -59,8 +62,12 @@ export function drawStrip(canvas, values, colour, { fixed = null, unit = "" } = 
 export function drawChart(canvas, opts) {
   const {
     height = 200, xMin, xMax, series = [], bands = [], hlines = [], vlines = [], spans = [],
-    yMin = null, yMax = null, yLabel = "", xFmt = (x) => x.toFixed(0), now = null, yPad = 0.08,
+    yMin = null, yMax = null, yLabel = "", xFmt = (x) => x.toFixed(0), now = null, yPad = 0.08, theme = "light",
   } = opts;
+  // Dark theme = patient-monitor screen.
+  const T = theme === "dark"
+    ? { bg: "#03070a", grid: "#14212a", text: "#8ea2b0", border: "#22323d", now: "#cfd8dc", font: 12 }
+    : { bg: "#fbfcfd", grid: "#e3e8ed", text: "#5c6b78", border: "#cfd8df", now: "#263238", font: 11 };
   const { ctx, w, h } = setup(canvas, height);
   const ml = 44, mr = 10, mt = 14, mb = 22;
   const pw = w - ml - mr, ph = h - mt - mb;
@@ -79,14 +86,14 @@ export function drawChart(canvas, opts) {
   const X = (x) => ml + ((x - x0) / (x1 - x0)) * pw;
   const Y = (v) => mt + ((hi - v) / (hi - lo)) * ph;
 
-  ctx.fillStyle = "#fbfcfd"; ctx.fillRect(ml, mt, pw, ph);
+  ctx.fillStyle = T.bg; ctx.fillRect(ml, mt, pw, ph);
   spans.forEach((s) => {
     const a = Math.max(ml, X(s.x0)), b = Math.min(ml + pw, X(s.x1));
     if (b > a) { ctx.fillStyle = s.colour; ctx.globalAlpha = s.alpha ?? 0.13; ctx.fillRect(a, mt, b - a, ph); ctx.globalAlpha = 1; }
   });
 
-  ctx.strokeStyle = "#e3e8ed"; ctx.lineWidth = 1;
-  ctx.fillStyle = "#5c6b78"; ctx.font = "11px system-ui, sans-serif"; ctx.textAlign = "right";
+  ctx.strokeStyle = T.grid; ctx.lineWidth = 1;
+  ctx.fillStyle = T.text; ctx.font = `${T.font}px system-ui, sans-serif`; ctx.textAlign = "right";
   for (let i = 0; i <= 4; i++) {
     const v = lo + (i / 4) * (hi - lo);
     const yy = Y(v);
@@ -121,9 +128,9 @@ export function drawChart(canvas, opts) {
   });
 
   if (now !== null && now >= x0 && now <= x1) {
-    ctx.strokeStyle = "#263238"; ctx.lineWidth = 1; ctx.setLineDash([2, 3]);
+    ctx.strokeStyle = T.now; ctx.lineWidth = 1; ctx.setLineDash([2, 3]);
     ctx.beginPath(); ctx.moveTo(X(now), mt); ctx.lineTo(X(now), mt + ph); ctx.stroke(); ctx.setLineDash([]);
-    ctx.fillStyle = "#263238"; ctx.textAlign = "center"; ctx.font = "10.5px system-ui, sans-serif"; ctx.fillText("now", X(now), mt - 3);
+    ctx.fillStyle = T.now; ctx.textAlign = "center"; ctx.font = "10.5px system-ui, sans-serif"; ctx.fillText("now", X(now), mt - 3);
   }
 
   series.forEach((s) => {
@@ -155,9 +162,9 @@ export function drawChart(canvas, opts) {
     }
   });
 
-  ctx.strokeStyle = "#cfd8df"; ctx.lineWidth = 1; ctx.strokeRect(ml + 0.5, mt + 0.5, pw - 1, ph - 1);
+  ctx.strokeStyle = T.border; ctx.lineWidth = 1; ctx.strokeRect(ml + 0.5, mt + 0.5, pw - 1, ph - 1);
   if (yLabel) {
-    ctx.save(); ctx.fillStyle = "#5c6b78"; ctx.font = "11px system-ui, sans-serif"; ctx.textAlign = "left";
+    ctx.save(); ctx.fillStyle = T.text; ctx.font = "11px system-ui, sans-serif"; ctx.textAlign = "left";
     ctx.fillText(yLabel, ml + 4, mt + 11); ctx.restore();
   }
 }

@@ -1,275 +1,271 @@
 // Live monitor shared by Concept A (integrated monitor) and Concept B
-// (non-invasive warning). Both concepts use the SAME layout, control bar and
-// alert-banner position (BME Design 8.2.5.3: a control must never move between
-// otherwise-similar screens) - only the content each concept may show differs.
-import { api, el, fmt, LEVEL, LEVEL_BY_INDEX, levelIcon, STATIC } from "./api.js";
+// (non-invasive warning), laid out like a bedside patient monitor: one fixed,
+// full-screen, non-scrolling display with the alarm message field at the top,
+// waveform channels on the left, numeric parameter boxes on the right and
+// soft-keys along the bottom. Both concepts use the SAME layout, so no control
+// or alarm field ever moves between them (BME Design 8.2.5.3).
+import { api, el, fmt, LEVEL, levelIcon, STATIC } from "./api.js";
 import { drawChart, drawStrip } from "./charts.js";
 
-const COL = { measured: "#37474f", forecast: "#6a1b9a", truth: "#e65100", r: "#00695c", c: "#ad1457" };
+// Monitor colour convention: ECG green, arterial pressure red, pleth cyan.
+const COL = { ecg: "#39ff9c", abp: "#ff5a5a", ppg: "#4dd8ee", forecast: "#c792ff", truth: "#ffab40",
+              r: "#4dd0a0", c: "#ff80ab", measured: "#ff8a80" };
 const SPEEDS = [1, 2, 5, 10, 20];
+
+// Beat rate (per min) from a 10 s window by autocorrelation: robust to
+// beat-to-beat amplitude changes. Display only - not a verified model output.
+function beatRate(x, fs) {
+  if (!x || x.length < fs * 4) return null;
+  const n = x.length, mean = x.reduce((a, v) => a + v, 0) / n;
+  const d = x.map((v) => v - mean);
+  const r0 = d.reduce((a, v) => a + v * v, 0);
+  if (!(r0 > 1e-9)) return null;
+  const lo = Math.round(0.27 * fs), hi = Math.round(2.0 * fs);   // 30-220 per min
+  const r = [];
+  for (let lag = lo - 1; lag <= hi + 1; lag++) {
+    let acc = 0;
+    for (let i = 0; i + lag < n; i++) acc += d[i] * d[i + lag];
+    r.push(acc / r0);
+  }
+  const peaks = [];
+  for (let i = 1; i < r.length - 1; i++) if (r[i] >= r[i - 1] && r[i] >= r[i + 1] && r[i] > 0.2) peaks.push(i);
+  if (!peaks.length) return null;
+  const top = Math.max(...peaks.map((i) => r[i]));
+  const first = peaks.find((i) => r[i] >= 0.8 * top);   // earliest strong peak: avoids double-period
+  return Math.round((60 * fs) / (first + lo - 1));
+}
+
+// HR from ECG; if ECG is missing or disagrees with the pleth by > 15 %, show
+// the pleth pulse rate instead (labelled PR), as bedside monitors do.
+function heartRate(w) {
+  const hr = beatRate(w.ecg, w.fs), pr = beatRate(w.ppg, w.fs);
+  if (hr && (!pr || Math.abs(hr - pr) / pr < 0.15)) return { v: hr, src: "HR" };
+  return pr ? { v: pr, src: "PR" } : null;
+}
+
+function percentile(arr, p) {
+  const s = arr.filter((v) => Number.isFinite(v) && v > 5).sort((a, b) => a - b);
+  return s.length ? s[Math.min(s.length - 1, Math.floor(p * s.length))] : null;
+}
 
 export function mountLive(root, concept, meta) {
   const isA = concept === "A";
   const info = meta.concepts[concept];
   const th = meta.thresholds;
   const S = { sid: null, rec: null, ticks: [], playing: false, speed: 5, inflight: false, timer: null,
-              truth: false, log: [], lastLevel: null, lastQuality: null, disposed: false, pendingConfirm: null };
+              truth: false, log: [], lastLevel: null, lastQuality: null, disposed: false, pendingConfirm: null,
+              lastWave: null };
 
-  // ------------------------------------------------------------------ layout
-  const recSelect = el("select", { id: "rec-select", "aria-label": "Patient recording" });
-  const startSelect = el("select", { id: "start-select", "aria-label": "Start position" });
-  const playBtn = el("button", { class: "btn primary", id: "play-btn", title: "Play / pause (Space)" }, "▶ Play");
-  const stepBtn = el("button", { class: "btn", id: "step-btn", title: "Advance one update (→)" }, "Step +1 s");
-  const resetBtn = el("button", { class: "btn", id: "reset-btn", title: "Restart this recording" }, "↺ Restart");
-  const speedSeg = el("div", { class: "seg", role: "group", "aria-label": "Playback speed" },
-    SPEEDS.map((s) => el("button", { "data-speed": s, "aria-pressed": String(s === S.speed) }, `${s}×`)));
-  const clock = el("span", { class: "clock", id: "clock", "aria-live": "off" }, "--:-- / --:--");
-  const truthToggle = el("input", { type: "checkbox", id: "truth-toggle" });
+  // ------------------------------------------------------------------ top bar
+  const recSelect = el("select", { id: "rec-select", "aria-label": "Patient (bed)" });
+  const clock = el("div", { class: "pm-clock", id: "clock", "aria-live": "off" }, "--:--");
+  const alarm = el("section", { class: "pm-alarm lvl-IDLE", id: "alert-banner", role: "status", "aria-live": "polite" });
+  const top = el("header", { class: "pm-top" },
+    el("a", { class: "pm-menu", href: "#/", title: "Back to the overview" }, "☰ Menu"),
+    el("div", { class: "pm-id" },
+      el("div", { class: "pm-concept" }, el("span", { class: "pm-tag" }, concept), info.short || info.name),
+      el("label", { class: "pm-bed" }, "Bed 1", recSelect)),
+    alarm,
+    el("div", { class: "pm-right" }, clock,
+      el("div", { class: "pm-ru", title: "Research prototype: clinical decision support only. It does not diagnose or recommend treatment." },
+        STATIC ? "RESEARCH DEMO · pre-computed" : "RESEARCH PROTOTYPE")));
 
-  const banner = el("section", { class: "alert-banner lvl-IDLE", id: "alert-banner", role: "status", "aria-live": "polite" });
-  const strips = {
-    ecg: el("canvas", { "aria-label": "ECG waveform" }),
-    ppg: el("canvas", { "aria-label": "PPG waveform" }),
-    abp: el("canvas", { "aria-label": "Arterial pressure waveform" }),
+  // ------------------------------------------------------------------ waveform / chart channels
+  // Compact colour key for a channel label column.
+  const key = (items, title = "") => el("span", { class: "pm-key-list" }, title ? el("span", {}, title) : null,
+    items.map(([t, c, mark]) => el("span", {}, el("i", { style: `background:${c}`, class: mark || "" }), t)));
+  const canv = (label) => el("canvas", { class: "fill", "aria-label": label });
+  const C = {
+    ecg: canv("ECG lead II waveform"), abp: canv("Arterial pressure waveform"), ppg: canv("Pleth waveform"),
+    fc: canv("MAP forecast, last 60 s and next 15 s"), trend: canv("Session MAP trend with alert levels"),
   };
-  const forecastCanvas = el("canvas", { "aria-label": "MAP forecast chart" });
-  const trendCanvas = el("canvas", { "aria-label": "Session MAP trend with alert levels" });
-  const rCanvas = el("canvas", { "aria-label": "Vascular resistance trend" });
-  const cCanvas = el("canvas", { "aria-label": "Arterial compliance trend" });
-  const tiles = el("div", { class: "tiles", id: "tiles" });
-  const logList = el("ul", { class: "log", id: "event-log" });
-  const ivList = el("div", { class: "iv-list", id: "iv-list" });
-  const errorBox = el("div", { class: "warnbox", hidden: true, role: "alert" });
+  const channel = (cls, name, colour, canvas, scale = null, extra = null) =>
+    el("div", { class: `pm-ch ${cls}` },
+      el("div", { class: "pm-ch-lbl", style: `color:${colour}` }, name, scale ? el("span", { class: "pm-scale" }, scale) : null),
+      el("div", { class: "pm-plot" }, canvas, extra));
+  const waves = el("section", { class: "pm-waves", "aria-label": "Waveforms and trends" },
+    channel("wave", "II", COL.ecg, C.ecg, "ECG"),
+    isA ? channel("wave", "ART", COL.abp, C.abp, "20–180 mmHg")
+        : el("div", { class: "pm-ch wave off" }, el("div", { class: "pm-ch-lbl", style: `color:${COL.abp}` }, "ART"),
+            el("div", { class: "pm-off" }, "ART not connected · non-invasive mode (ECG + pulse oximeter only)")),
+    channel("wave", "PLETH", COL.ppg, C.ppg),
+    channel("chart", isA ? "FCST" : "EST", COL.forecast, C.fc,
+      key([...(isA ? [["measured", COL.measured]] : []), ["forecast", COL.forecast], ["±σ", COL.forecast, "band"], ["true", COL.truth]],
+        isA ? "MAP · 60 s + 15 s" : "MAP · LOW CONF.")),
+    channel("chart", "TREND", "#b0bec5", C.trend, key([["alert level", "#2e7d32", "band"], ...(isA ? [["treatment", COL.forecast, "bar"]] : [])], "session MAP")));
 
-  const header = el("div", { class: "page-head" },
-    el("div", {},
-      el("h1", {}, `Concept ${concept} · ${info.name}`),
-      el("div", { class: "sub" }, `${info.inputs} · ${info.setting}`)),
-    el("div", { class: "chips" }, info.combines.map((c) => el("span", { class: "chip strong" }, c)),
-      el("span", { class: "chip" }, info.mode)));
+  // ------------------------------------------------------------------ parameter boxes
+  const P = {};
+  const param = (key, label, colour, extraCls = "") => {
+    const box = el("div", { class: `pm-p ${extraCls}`, style: `--c:${colour}` },
+      el("div", { class: "pm-p-lbl" }, label), el("div", { class: "pm-p-body" }));
+    P[key] = box.querySelector(".pm-p-body");
+    return box;
+  };
+  const logList = el("ul", { class: "pm-log", id: "event-log" });
+  const params = el("section", { class: "pm-params", "aria-label": "Numeric parameters" },
+    param("hr", "HR  bpm", COL.ecg),
+    param("art", isA ? "ART  mmHg" : "ART", COL.abp),
+    param("fc", isA ? "FCST MAP · 15 s" : "EST MAP · 15 s", COL.forecast),
+    param("risk", `RISK  P(MAP<${th.target})`, "#ffd54f"),
+    param("rc", "VASCULAR STATE  (trend)", COL.r, "rc"),
+    isA ? param("tx", "TX RESPONSE", COL.forecast, "tx") : param("inputs", "INPUTS", "#b0bec5", "tx"),
+    el("div", { class: "pm-p log", style: "--c:#90a4ae" }, el("div", { class: "pm-p-lbl" }, "EVENTS"), logList),
+    el("div", { class: "pm-status", id: "mon-quality" }, ""));
 
-  const controls = el("section", { class: "card controls", "aria-label": "Playback controls" },
-    el("label", { for: "rec-select" }, "Patient"), recSelect,
-    el("label", { for: "start-select" }, "Start"), startSelect,
-    playBtn, stepBtn, resetBtn, speedSeg, clock,
-    el("span", { class: "grow" }),
-    el("label", { for: "truth-toggle", title: "Shows what actually happened. Not available at the bedside." },
-      truthToggle, "Verification overlay"));
-
-  const monitor = el("section", { class: "monitor", "aria-label": "Patient monitor waveforms" },
-    el("div", { class: "mon-head" }, el("span", {}, "Last 10 s · model input window"), el("span", { id: "mon-quality" }, "")),
-    el("div", { class: "strip" }, el("span", { class: "lbl", style: "color:var(--ecg)" }, "ECG II"), strips.ecg),
-    el("div", { class: "strip" }, el("span", { class: "lbl", style: "color:var(--ppg)" }, "PLETH"), strips.ppg),
-    el("div", { class: "strip" }, el("span", { class: "lbl", style: "color:var(--abp)" }, "ART"),
-      isA ? strips.abp : el("div", { class: "absent" }, "Not measured - non-invasive mode (no arterial line)")));
-
-  const forecastCard = el("section", { class: "card chart-card" },
-    el("h3", {}, isA ? "Pressure forecast - next 15 s" : "Estimated pressure - next 15 s (low confidence)"),
-    forecastCanvas,
-    el("div", { class: "legend" },
-      isA && el("span", {}, el("i", { style: `background:${COL.measured}` }), "Measured MAP"),
-      el("span", {}, el("i", { style: `background:${COL.forecast}` }), isA ? "Forecast MAP (next 15 s)" : "Estimated MAP (next 15 s)"),
-      el("span", { style: `color:${COL.forecast}` }, "• predicted pressure samples (1 s apart)"),
-      el("span", { style: `color:${COL.forecast}` }, el("i", { class: "band", style: `background:${COL.forecast}` }), "± calibrated error"),
-      el("span", {}, el("i", { class: "dash", style: `color:${COL.forecast}` }), "past forecasts"),
-      el("span", { class: "truth-legend", hidden: true, style: `color:${COL.truth}` }, el("i", { class: "dash" }), "True MAP (verification)"),
-      el("span", {}, `Dashed lines: ${th.watch} watch · ${th.target} target · ${th.critical} critical`)));
-
-  const trendCard = el("section", { class: "card chart-card" },
-    el("h3", {}, "Session trend - forecast MAP and alert level"),
-    trendCanvas,
-    el("div", { class: "legend" },
-      ["STABLE", "WATCH", "DETERIORATING", "CRITICAL", "SIGNAL CHECK"].map((n) =>
-        el("span", {}, el("span", { class: "lvl-dot", style: `background:${LEVEL[n].colour}` }), n)),
-      isA && el("span", { style: "color:#6a1b9a" }, "| purple line = intervention")));
-
-  const rcCard = el("section", { class: "card chart-card" },
-    el("h3", {}, "Vascular state - relative trends"),
-    el("div", { style: "display:grid;grid-template-columns:1fr 1fr;gap:10px" }, rCanvas, cCanvas),
-    el("div", { class: "legend" },
-      el("span", {}, el("i", { style: `background:${COL.r}` }), "Resistance R"),
-      el("span", {}, el("i", { style: `background:${COL.c}` }), "Compliance C"),
-      el("span", { class: "truth-legend", hidden: true, style: `color:${COL.truth}` }, el("i", { class: "dash" }), "True value (simulation)")),
-    el("p", { class: "small muted", style: "margin:6px 0 0" },
-      "Shown as trends, not calibrated absolute values: verification found real-data fine-tuning weakened R/C tracking (docs/07)."));
-
-  const rightCol = el("div", { class: "stack" });
-  const tilesCard = el("section", { class: "card" }, el("h3", {}, isA ? "Current status" : "Risk estimate"), tiles);
-  rightCol.append(tilesCard);
-
-  if (isA) {
-    const markVaso = el("button", { class: "btn warn", "data-kind": "vasopressor" }, "+ Mark vasopressor");
-    const markFluid = el("button", { class: "btn warn", "data-kind": "fluid" }, "+ Mark fluid bolus");
-    [markVaso, markFluid].forEach((b) => b.addEventListener("click", () => confirmMark(b)));
-    rightCol.append(el("section", { class: "card" },
-      el("h3", {}, "Intervention response"),
-      el("p", { class: "small muted", style: "margin:0 0 8px" },
-        "Compares the patient with a 30 s pre-treatment baseline from 30-60 s after onset. Reports a trend only - never a treatment recommendation."),
-      ivList, STATIC
-        // Public static demo: no live model, so hand-entered events cannot be assessed.
-        ? el("p", { class: "small muted", style: "margin:8px 0 0" },
-            "Public demo: treatment events come from the recorded pump/EHR feed. Hand-marking interventions needs the live model server (scripts/run_app.sh).")
-        : el("div", { class: "iv-actions" }, markVaso, markFluid)));
-  } else {
-    rightCol.append(el("section", { class: "card" },
-      el("h3", {}, "Inputs available"),
-      el("div", { class: "missing" },
-        el("div", {}, el("span", {}, "ECG"), el("span", { class: "yes" }, "✓ used")),
-        el("div", {}, el("span", {}, "PPG (pulse oximeter)"), el("span", { class: "yes" }, "✓ used")),
-        el("div", {}, el("span", {}, "Invasive arterial pressure"), el("span", { class: "no" }, "✗ not available")),
-        el("div", {}, el("span", {}, "Intervention events"), el("span", { class: "no" }, "✗ not used"))),
-      el("div", { class: "warnbox", id: "b-limit", style: "margin-top:8px" }, "")));
+  // ------------------------------------------------------------------ soft-keys
+  const startSelect = el("select", { id: "start-select", "aria-label": "Start position" });
+  const playBtn = el("button", { class: "pm-key primary", id: "play-btn", title: "Play / pause (Space)" }, "▶ Play");
+  const stepBtn = el("button", { class: "pm-key", id: "step-btn", title: "Advance one update (→)" }, "Step +1 s");
+  const resetBtn = el("button", { class: "pm-key", id: "reset-btn", title: "Restart this recording" }, "↺ Restart");
+  const speedSeg = el("div", { class: "pm-seg", role: "group", "aria-label": "Playback speed" },
+    SPEEDS.map((s) => el("button", { "data-speed": s, "aria-pressed": String(s === S.speed) }, `${s}×`)));
+  const truthToggle = el("input", { type: "checkbox", id: "truth-toggle" });
+  const helpBtn = el("button", { class: "pm-key", title: "How alerts work" }, "? Alarms");
+  const markBtns = [];
+  if (isA && !STATIC) {
+    for (const [kind, label] of [["vasopressor", "+ Vasopressor"], ["fluid", "+ Fluid bolus"]]) {
+      const b = el("button", { class: "pm-key warn", "data-kind": kind }, label);
+      b.addEventListener("click", () => confirmMark(b));
+      markBtns.push(b);
+    }
   }
+  const keys = el("footer", { class: "pm-keys", "aria-label": "Monitor controls" },
+    el("label", { class: "pm-key-lbl", for: "start-select" }, "Start"), startSelect,
+    playBtn, stepBtn, resetBtn, speedSeg, ...markBtns,
+    el("span", { class: "grow" }),
+    el("label", { class: "pm-key toggle", for: "truth-toggle", title: "Shows what actually happened. Not available at the bedside." },
+      truthToggle, "Verification overlay"),
+    helpBtn,
+    el("nav", { class: "pm-switch", "aria-label": "Switch concept" },
+      ["a", "b", "c"].map((c) => el("a", { href: `#/concept-${c}`, class: c.toUpperCase() === concept ? "on" : "" }, c.toUpperCase()))));
 
-  rightCol.append(el("section", { class: "card" }, el("h3", {}, "Event log"), logList),
-    el("section", { class: "card help" }, el("details", {},
-      el("summary", {}, "How alerts work"),
+  const errorBox = el("div", { class: "pm-toast", hidden: true, role: "alert" });
+  const help = el("div", { class: "pm-help", hidden: true, role: "dialog", "aria-label": "How alerts work" },
+    el("div", { class: "pm-help-card" },
+      el("h2", {}, "How alerts work"),
       el("dl", {},
         el("dt", {}, "STABLE"), el("dd", {}, `Forecast MAP at or above ${th.watch} mmHg.`),
-        el("dt", {}, "WATCH (low priority)"), el("dd", {}, `Forecast below ${th.watch}, or falling ≥${th.rapid_drop} mmHg over 15 s.`),
-        el("dt", {}, "DETERIORATING (medium)"), el("dd", {}, `Forecast below the ${th.target} mmHg treatment target.`),
-        el("dt", {}, "CRITICAL (high)"), el("dd", {}, `Forecast below ${th.critical} mmHg.`),
-        el("dt", {}, "Persistence"), el("dd", {}, `Escalates after ${th.escalate_persist} consecutive updates; steps down after ${th.deescalate_persist} with a 2 mmHg margin.`),
-        el("dt", {}, "Confidence cap"), el("dd", {}, "Low-confidence estimates can raise at most WATCH; moderate at most DETERIORATING."),
-        el("dt", {}, "SIGNAL CHECK"), el("dd", {}, "Technical alarm: signal unusable, so no haemodynamic alert is issued."),
-        el("dt", {}, "Keyboard"), el("dd", {}, "Space = play/pause, → = step one update.")))));
+        el("dt", {}, "WATCH · low priority"), el("dd", {}, `Forecast below ${th.watch}, or falling ≥ ${th.rapid_drop} mmHg over 15 s.`),
+        el("dt", {}, "DETERIORATING · medium"), el("dd", {}, `Forecast below the ${th.target} mmHg treatment target.`),
+        el("dt", {}, "CRITICAL · high"), el("dd", {}, `Forecast below ${th.critical} mmHg.`),
+        el("dt", {}, "Persistence"), el("dd", {}, `Escalates after ${th.escalate_persist} consecutive updates; steps down after ${th.deescalate_persist}, with a 2 mmHg margin.`),
+        el("dt", {}, "Confidence cap"), el("dd", {}, "A low-confidence estimate can raise at most WATCH; moderate at most DETERIORATING."),
+        el("dt", {}, "Fail-safe"), el("dd", {}, "The alarm never drops below what the measured arterial pressure shows, and a weaker estimate cannot clear an alarm."),
+        el("dt", {}, "SIGNAL CHECK"), el("dd", {}, "Technical alarm: the signal is unusable, so no haemodynamic alert is issued."),
+        el("dt", {}, "HR"), el("dd", {}, "Beat rate from the 10 s ECG on screen (PR from the pleth if the ECG is missing or disagrees). For orientation only; not a verified model output."),
+        el("dt", {}, "Keyboard"), el("dd", {}, "Space = play / pause · → = step one update · Esc = close")),
+      el("p", { class: "pm-help-note" }, "Research prototype · clinical decision support only. It does not diagnose or recommend treatment."),
+      el("button", { class: "pm-key primary" }, "Close")));
 
-  root.replaceChildren(header, controls, errorBox, banner,
-    el("div", { class: "live-grid" },
-      el("div", { class: "stack" }, monitor, forecastCard, trendCard, rcCard),
-      rightCol));
+  root.replaceChildren(el("div", { class: "pm", "data-concept": concept },
+    top, el("div", { class: "pm-main" }, waves, params), keys, errorBox, help));
 
   // ------------------------------------------------------------------ helpers
-  function showError(msg) {
-    errorBox.textContent = msg;
-    errorBox.hidden = !msg;
-  }
+  function showError(msg) { errorBox.textContent = msg; errorBox.hidden = !msg; }
 
   function addLog(t, text, colour) {
     S.log.unshift({ t, text, colour });
-    S.log = S.log.slice(0, 80);
+    S.log = S.log.slice(0, 40);
     logList.replaceChildren(...S.log.map((e) =>
       el("li", {}, el("span", { class: "t" }, fmt.time(e.t)),
         el("span", {}, e.colour ? el("span", { class: "lvl-dot", style: `background:${e.colour}` }) : null, e.text))));
   }
 
-  function tile(k, v, unit, d, extra = "") {
-    return el("div", { class: `tile ${extra}` }, el("div", { class: "k" }, k),
-      el("div", { class: "v" }, v, unit ? el("small", {}, unit) : null), d ? el("div", { class: "d" }, d) : null);
-  }
-
-  function riskDial(score) {
-    const ns = "http://www.w3.org/2000/svg";
-    const svg = document.createElementNS(ns, "svg");
-    svg.setAttribute("viewBox", "0 0 120 120");
-    svg.setAttribute("class", "risk-dial");
-    svg.setAttribute("role", "img");
-    svg.setAttribute("aria-label", `Risk score ${score ?? "unavailable"} of 100`);
-    const r = 48, c = 2 * Math.PI * r, frac = score === null ? 0 : score / 100;
-    const colour = score === null ? "#b0bec5" : score >= 80 ? LEVEL.CRITICAL.colour : score >= 50 ? LEVEL.DETERIORATING.colour : score >= 20 ? LEVEL.WATCH.colour : LEVEL.STABLE.colour;
-    const bg = document.createElementNS(ns, "circle");
-    Object.entries({ cx: 60, cy: 60, r, fill: "none", stroke: "#e3e8ed", "stroke-width": 12 }).forEach(([k, v]) => bg.setAttribute(k, v));
-    const fg = document.createElementNS(ns, "circle");
-    Object.entries({ cx: 60, cy: 60, r, fill: "none", stroke: colour, "stroke-width": 12, "stroke-linecap": "round",
-      "stroke-dasharray": `${c * frac} ${c}`, transform: "rotate(-90 60 60)" }).forEach(([k, v]) => fg.setAttribute(k, v));
-    const txt = document.createElementNS(ns, "text");
-    Object.entries({ x: 60, y: 66, "text-anchor": "middle", "font-size": 28, "font-weight": 800, fill: "#17212b" }).forEach(([k, v]) => txt.setAttribute(k, v));
-    txt.textContent = score === null ? "—" : String(score);
-    const sub = document.createElementNS(ns, "text");
-    Object.entries({ x: 60, y: 84, "text-anchor": "middle", "font-size": 10, fill: "#566573" }).forEach(([k, v]) => sub.setAttribute(k, v));
-    sub.textContent = "of 100";
-    svg.append(bg, fg, txt, sub);
-    return svg;
-  }
+  // replaceChildren() would print "null", so empty slots are dropped first.
+  const put = (node, ...kids) => node.replaceChildren(...kids.filter((x) => x !== null && x !== undefined && x !== false));
+  const big = (v, unit, cls = "") => el("div", { class: `pm-big ${cls}` }, v, unit ? el("small", {}, unit) : null);
+  const sub = (...t) => el("div", { class: "pm-sub" }, ...t);
 
   // ------------------------------------------------------------------ rendering
-  function renderBanner(k) {
-    const a = k.alert;
-    const name = a.level_name;
-    const cls = a.technical ? "SIGNAL" : name;
-    banner.className = `alert-banner lvl-${cls}`;
-    const levelBox = el("div", { class: "level" }, levelIcon(name), el("div", {},
-      el("div", {}, name), el("div", { style: "font-size:12.5px;font-weight:600;opacity:.9" }, LEVEL[name]?.priority || "")));
-    const side = el("div", { class: "side" });
-    if (k.forecast_map !== null) {
-      side.append(el("div", {}, isA ? "Forecast MAP " : "Estimated MAP ", el("b", {}, `${fmt.num(k.forecast_map)} mmHg`)));
-      side.append(el("div", {}, `P(MAP < ${th.target}) `, el("b", {}, fmt.pct(k.p_below_target))));
-    }
-    if (isA && k.conventional_alarm !== null) {
-      side.append(el("div", { title: "What a conventional threshold monitor shows from the measured MAP alone" },
-        `Conventional monitor: ${k.conventional_alarm ? "alarming" : "quiet"}`));
-    }
-    if (a.held) {
-      side.append(el("div", { style: "font-weight:700" }, "⚑ Alarm held - arterial line unavailable"));
-    }
-    banner.replaceChildren(levelBox, el("div", { class: "reason" }, a.reason), side);
+  function renderAlarm(k) {
+    const a = k.alert, name = a.level_name;
+    alarm.className = `pm-alarm lvl-${a.technical ? "SIGNAL" : name}`;
+    alarm.title = a.reason;
+    alarm.replaceChildren(levelIcon(name),
+      el("div", { class: "pm-alarm-txt" },
+        el("div", { class: "pm-alarm-level" }, name, el("span", {}, LEVEL[name]?.priority || ""),
+          a.held ? el("span", { class: "held" }, "⚑ HELD") : null),
+        el("div", { class: "pm-alarm-reason" }, a.reason)));
   }
 
-  function renderTiles(k) {
+  function renderParams(k) {
     const truth = S.truth && k.truth ? k.truth : null;
-    const items = [];
+    const w = S.lastWave;
+    // HR
+    const hr = w ? heartRate(w) : null;
+    P.hr.previousSibling.textContent = `${hr ? hr.src : "HR"}  /min`;
+    put(P.hr, big(hr ? hr.v : "---", "", "hr"), sub(hr && hr.src === "PR" ? "PR from pleth · display only" : "from ECG · display only"));
+    // ART
     if (isA) {
-      items.push(tile("Measured MAP", fmt.num(k.current_map), "mmHg", "Arterial line, last 4 s"));
-      items.push(tile("Forecast MAP", fmt.num(k.forecast_map), "mmHg", `next 15 s · ± ${fmt.num(k.sigma, 1)}`));
-      items.push(tile(`P(MAP < ${th.target})`, fmt.pct(k.p_below_target), "", "calibrated probability"));
-      items.push(tile("Confidence", k.confidence || "—", "", k.regime ? k.regime.replaceAll("_", " + ").toUpperCase() : ""));
-      items.push(tile("Resistance R", fmt.num(k.r, 2), "", "mmHg·s/mL (trend)"));
-      items.push(tile("Compliance C", fmt.num(k.c, 2), "", "mL/mmHg (trend)"));
+      const recent = w && w.abp ? w.abp.slice(-Math.round(4 * w.fs)) : [];
+      const sys = k.current_map !== null ? percentile(recent, 0.97) : null;
+      const dia = k.current_map !== null ? percentile(recent, 0.03) : null;
+      put(P.art, 
+        big(sys !== null ? `${Math.round(sys)}/${Math.round(dia)}` : "---/---", "", "art"),
+        el("div", { class: "pm-mid" }, `(${fmt.num(k.current_map)})`, el("small", {}, " MAP")),
+        sub(k.conventional_alarm === null ? "arterial line unavailable" : `threshold alarm: ${k.conventional_alarm ? "ALARMING" : "quiet"}`));
     } else {
-      const score = k.risk_score;
-      items.push(el("div", { class: "tile wide risk" }, riskDial(score),
-        el("div", {}, el("div", { class: "k" }, `Risk of MAP < ${th.target} in 15 s`),
-          el("div", { style: "margin:6px 0" }, el("span", { class: `conf ${k.confidence || ""}` }, `${k.confidence || "—"} confidence`)),
-          el("div", { class: "d" }, "Probability from the estimate and its calibrated error. A low-confidence score stays near 50 - it cannot separate high from low risk."))));
-      items.push(tile("Estimated MAP", fmt.num(k.forecast_map), "mmHg", `± ${fmt.num(k.sigma, 0)} mmHg (1 SD)`));
-      items.push(tile("Alert cap", k.alert.confidence_cap || "—", "", "highest level allowed"));
+      put(P.art, big("---", "", "off"), sub("no arterial line"));
     }
-    items.push(tile("Signal quality", (k.quality || "—").replace("_", " "), "", k.warnings.length ? `${k.warnings.length} warning(s)` : "no warnings"));
-    items.push(tile("Update latency", fmt.num(k.latency_ms, 1), "ms", `model ${meta.model.device}`));
-    if (truth) {
-      items.push(tile("True future MAP", fmt.num(truth.future_map), "mmHg", truth.kind, "truth"));
-      if (truth.r !== undefined) items.push(tile("True R / C", `${fmt.num(truth.r, 2)} / ${fmt.num(truth.c, 2)}`, "", "simulation ground truth", "truth"));
+    // Forecast / estimate
+    put(P.fc, 
+      big(fmt.num(k.forecast_map), "mmHg"),
+      sub(`± ${fmt.num(k.sigma, isA ? 1 : 0)} · `, el("b", { class: `conf ${k.confidence || ""}` }, `${k.confidence || "—"} confidence`)),
+      truth ? sub(el("span", { style: `color:${COL.truth}` }, `true future ${fmt.num(truth.future_map)} mmHg`)) : null);
+    // Risk
+    const score = k.risk_score;
+    const rc = score === null ? "#78909c" : score >= 80 ? LEVEL.CRITICAL.colour : score >= 50 ? LEVEL.DETERIORATING.colour
+      : score >= 20 ? LEVEL.WATCH.colour : LEVEL.STABLE.colour;
+    put(P.risk, 
+      el("div", { class: "pm-riskrow" }, big(score === null ? "--" : String(score), "%", "risk"),
+        el("div", { class: "pm-meter", "aria-hidden": "true" }, el("i", { style: `width:${score ?? 0}%;background:${rc}` }))),
+      sub(isA ? "calibrated probability" : `alert capped at ${k.alert.confidence_cap || "WATCH"}`));
+    // R / C
+    put(P.rc, el("div", { class: "pm-rc" },
+      el("div", {}, el("span", { style: `color:${COL.r}` }, "R "), el("b", {}, fmt.num(k.r, 2)),
+        truth && truth.r !== undefined ? el("small", { style: `color:${COL.truth}` }, ` true ${fmt.num(truth.r, 2)}`) : null),
+      el("div", {}, el("span", { style: `color:${COL.c}` }, "C "), el("b", {}, fmt.num(k.c, 2)),
+        truth && truth.c !== undefined ? el("small", { style: `color:${COL.truth}` }, ` true ${fmt.num(truth.c, 2)}`) : null)),
+      sub("relative trend · not calibrated (see docs 07)"));
+    // Treatment response (A) or inputs (B)
+    if (isA) renderTx(k);
+    else {
+      put(P.inputs, el("div", { class: "pm-inputs" },
+        el("span", { class: "yes" }, "ECG ✓"), el("span", { class: "yes" }, "PLETH ✓"),
+        el("span", { class: "no" }, "ART ✗"), el("span", { class: "no" }, "EVENTS ✗")),
+        sub(`Error ±${fmt.num(k.sigma, 0)} mmHg without arterial pressure: alarms limited to WATCH.`));
     }
-    tiles.replaceChildren(...items);
-    if (!isA) {
-      const box = root.querySelector("#b-limit");
-      box.textContent = `Without arterial pressure the calibrated estimate error is about ±${fmt.num(k.sigma, 0)} mmHg (1 SD), ` +
-        `so this concept can raise at most a WATCH alert. Verification: AUROC well below the 0.80 marginal target (see Evidence).`;
-    }
+    root.querySelector("#mon-quality").textContent =
+      `SQI ${(k.quality || "—").replace("_", " ").toUpperCase()}` +
+      `${k.warnings.length ? " · " + k.warnings[0] : ""} · ${k.regime ? k.regime.replaceAll("_", "+").toUpperCase() : ""} · ` +
+      `${fmt.num(k.latency_ms, 1)} ms`;
   }
 
-  function renderInterventions(k) {
-    if (!isA) return;
+  function renderTx(k) {
     const records = k.interventions || [];
     if (!records.length) {
-      ivList.replaceChildren(el("p", { class: "small muted", style: "margin:0" }, "No interventions yet. Events come from the pump/EHR feed or can be entered with the buttons below."));
+      put(P.tx, big("—", "", "tx"), sub(STATIC ? "no treatment event yet (pump/EHR feed)" : "no treatment yet · use + Vasopressor / + Fluid"));
       return;
     }
-    ivList.replaceChildren(...records.slice().reverse().map((r) => {
-      const statusCls = r.status.replaceAll(" ", "-");
-      const parts = [];
-      if (r.d_map !== null) parts.push(`MAP ${r.d_map > 0 ? "+" : ""}${fmt.num(r.d_map, 0)} mmHg`);
-      if (r.r_change_pct !== null) parts.push(`R ${r.r_change_pct > 0 ? "+" : ""}${fmt.num(r.r_change_pct, 0)}%`);
-      if (r.c_change_pct !== null) parts.push(`C ${r.c_change_pct > 0 ? "+" : ""}${fmt.num(r.c_change_pct, 0)}%`);
-      const since = S.ticks.length ? S.ticks[S.ticks.length - 1].t - r.onset_t : 0;
-      return el("div", { class: "iv" },
-        el("div", { class: "iv-top" }, el("b", {}, r.label),
-          el("span", { class: `status ${statusCls}` }, r.status + (r.final ? "" : r.status === "pending" ? "" : " (provisional)"))),
-        el("div", { class: "meta" }, `Onset ${fmt.time(r.onset_t)} · ${r.origin === "manual" ? "clinician entry" : "pump/EHR event"} · `,
-          r.status === "pending" ? `assessing in ${Math.max(0, Math.ceil(30 - since))} s` : parts.join(" · ") || "awaiting data"),
-        r.confounded_with && r.confounded_with.length
-          ? el("div", { class: "meta", style: "color:#8a5a00" }, "⚠ Overlaps another intervention - effects cannot be separated.") : null,
-        r.baseline && r.baseline.map !== null ? el("div", { class: "meta" }, `Baseline MAP ${fmt.num(r.baseline.map)} mmHg (${fmt.num(r.baseline.seconds)} s)`) : null);
-    }));
+    const r = records[records.length - 1];
+    const since = S.ticks.length ? S.ticks[S.ticks.length - 1].t - r.onset_t : 0;
+    const parts = [];
+    if (r.d_map !== null) parts.push(`MAP ${r.d_map > 0 ? "+" : ""}${fmt.num(r.d_map, 0)}`);
+    if (r.r_change_pct !== null) parts.push(`R ${r.r_change_pct > 0 ? "+" : ""}${fmt.num(r.r_change_pct, 0)}%`);
+    put(P.tx, 
+      el("div", { class: `pm-tx status ${r.status.replaceAll(" ", "-")}` }, r.status.toUpperCase()),
+      sub(`${r.label} · ${fmt.time(r.onset_t)}`),
+      sub(r.status === "pending" ? `assessing in ${Math.max(0, Math.ceil(30 - since))} s` : parts.join(" · ") + (r.final ? " · final" : "")),
+      r.confounded_with && r.confounded_with.length ? sub("⚠ overlapping treatments") : null);
   }
 
-  function renderStrips(k) {
-    const w = k.waveforms;
+  function renderStrips() {
+    const w = S.lastWave;
     if (!w) return;
-    drawStrip(strips.ecg, w.ecg, "#39ff9c");
-    drawStrip(strips.ppg, w.ppg, "#4dd8ee");
-    if (isA) drawStrip(strips.abp, w.abp, "#ff5a5a", { fixed: [20, 180], unit: "mmHg" });
-    root.querySelector("#mon-quality").textContent = `quality: ${k.quality}${k.warnings.length ? " · " + k.warnings[0] : ""}`;
+    drawStrip(C.ecg, w.ecg, COL.ecg, { height: "fill" });
+    drawStrip(C.ppg, w.ppg, COL.ppg, { height: "fill" });
+    if (isA) drawStrip(C.abp, w.abp, COL.abp, { fixed: [20, 180], unit: "mmHg", height: "fill" });
   }
 
   function renderCharts() {
@@ -277,56 +273,43 @@ export function mountLive(root, concept, meta) {
     const k = S.ticks[S.ticks.length - 1];
     const now = k.t;
     const hist = S.ticks.filter((x) => x.t >= now - 60);
-    const series = [];
-    const bands = [];
+    const series = [], bands = [];
     if (isA) series.push({ points: hist.map((x) => [x.t, x.current_map ?? NaN]), colour: COL.measured, width: 2 });
     series.push({ points: hist.map((x) => [x.t, x.forecast_map ?? NaN]), colour: COL.forecast, width: 1.3, dash: [3, 3] });
     if (k.forecast_abp && k.forecast_abp.length) {
-      // The model predicts instantaneous pressure SAMPLES (anywhere in the
-      // cardiac cycle), so they are drawn as dots, not joined into a line that
-      // would read as a MAP trajectory. The forecast MAP is their mean.
-      const fpts = k.forecast_abp.map((v, i) => [now + i, v]);
-      const avg = k.forecast_map;
-      const end = now + k.forecast_abp.length - 1;
-      bands.push({ points: [[now, avg - k.sigma, avg + k.sigma], [end, avg - k.sigma, avg + k.sigma]], colour: COL.forecast, alpha: 0.15 });
+      // Predicted instantaneous pressure samples are dots; their mean is the forecast MAP.
+      const avg = k.forecast_map, end = now + k.forecast_abp.length - 1;
+      bands.push({ points: [[now, avg - k.sigma, avg + k.sigma], [end, avg - k.sigma, avg + k.sigma]], colour: COL.forecast, alpha: 0.2 });
       series.push({ points: [[now, avg], [end, avg]], colour: COL.forecast, width: 3 });
-      series.push({ points: fpts, colour: COL.forecast, width: 0, dots: true });
+      series.push({ points: k.forecast_abp.map((v, i) => [now + i, v]), colour: COL.forecast, width: 0, dots: true });
     }
     if (S.truth) {
       series.push({ points: hist.map((x) => [x.t, x.truth?.current_map ?? NaN]), colour: COL.truth, width: 1.6, dash: [6, 4] });
-      if (k.truth?.future_map !== null && k.truth?.future_map !== undefined) {
-        series.push({ points: [[now, k.truth.future_map], [now + 14, k.truth.future_map]], colour: COL.truth, width: 2, dash: [6, 4] });
-      }
+      if (k.truth?.future_map != null) series.push({ points: [[now, k.truth.future_map], [now + 14, k.truth.future_map]], colour: COL.truth, width: 2, dash: [6, 4] });
     }
     const hl = [
-      { y: th.watch, label: `${th.watch} watch`, colour: "#0277bd" },
-      { y: th.target, label: `${th.target} target`, colour: "#b26a00" },
-      { y: th.critical, label: `${th.critical} critical`, colour: "#c62828" },
+      { y: th.watch, label: `${th.watch}`, colour: "#4fc3f7" },
+      { y: th.target, label: `${th.target}`, colour: "#ffd54f" },
+      { y: th.critical, label: `${th.critical}`, colour: "#ff5252" },
     ];
-    drawChart(forecastCanvas, { height: 220, xMin: now - 60, xMax: now + 15, series, bands, hlines: hl, now,
-      xFmt: fmt.time, yMin: isA ? null : 0, yLabel: "mmHg" });
+    drawChart(C.fc, { height: "fill", theme: "dark", xMin: now - 60, xMax: now + 15, series, bands, hlines: hl, now,
+      xFmt: fmt.time, yMin: isA ? null : 0 });
 
     const all = S.ticks;
     const t0 = all[0].t, t1 = Math.max(all[all.length - 1].t, t0 + 30);
-    const spans = [];
-    for (let i = 0; i < all.length; i++) {
-      const a = all[i], b = all[i + 1];
-      spans.push({ x0: a.t, x1: b ? b.t : a.t + 1, colour: LEVEL[a.alert.level_name]?.colour || "#999", alpha: 0.18 });
-    }
-    const vlines = isA ? (all[all.length - 1].interventions || []).map((r) => ({ x: r.onset_t, label: r.type, colour: "#6a1b9a" })) : [];
+    const spans = all.map((a, i) => ({ x0: a.t, x1: all[i + 1] ? all[i + 1].t : a.t + 1,
+      colour: LEVEL[a.alert.level_name]?.colour || "#999", alpha: 0.28 }));
+    const vlines = isA ? (k.interventions || []).map((r) => ({ x: r.onset_t, label: r.type, colour: COL.forecast })) : [];
     const tSeries = [{ points: all.map((x) => [x.t, x.forecast_map ?? NaN]), colour: COL.forecast, width: 1.8 }];
     if (isA) tSeries.unshift({ points: all.map((x) => [x.t, x.current_map ?? NaN]), colour: COL.measured, width: 1.2 });
     if (S.truth) tSeries.push({ points: all.map((x) => [x.t, x.truth?.future_map ?? NaN]), colour: COL.truth, width: 1.4, dash: [6, 4] });
-    drawChart(trendCanvas, { height: 190, xMin: t0, xMax: t1, series: tSeries, spans, vlines, hlines: hl, xFmt: fmt.time, yLabel: "mmHg" });
+    drawChart(C.trend, { height: "fill", theme: "dark", xMin: t0, xMax: t1, series: tSeries, spans, vlines, hlines: hl, xFmt: fmt.time });
+  }
 
-    const rS = [{ points: all.map((x) => [x.t, x.r ?? NaN]), colour: COL.r, width: 1.8 }];
-    const cS = [{ points: all.map((x) => [x.t, x.c ?? NaN]), colour: COL.c, width: 1.8 }];
-    if (S.truth && all[0].truth?.r !== undefined) {
-      rS.push({ points: all.map((x) => [x.t, x.truth.r]), colour: COL.truth, width: 1.3, dash: [6, 4] });
-      cS.push({ points: all.map((x) => [x.t, x.truth.c]), colour: COL.truth, width: 1.3, dash: [6, 4] });
-    }
-    drawChart(rCanvas, { height: 140, xMin: t0, xMax: t1, series: rS, vlines, xFmt: fmt.time, yLabel: "R" });
-    drawChart(cCanvas, { height: 140, xMin: t0, xMax: t1, series: cS, vlines, xFmt: fmt.time, yLabel: "C" });
+  function redraw() {
+    if (!S.ticks.length) return;
+    renderStrips();
+    renderCharts();
   }
 
   function ingest(ticks) {
@@ -334,8 +317,7 @@ export function mountLive(root, concept, meta) {
       S.ticks.push(k);
       const name = k.alert.level_name;
       if (name !== S.lastLevel) {
-        if (S.lastLevel !== null) addLog(k.t, `${S.lastLevel} → ${name}`, LEVEL[name]?.colour);
-        else addLog(k.t, `Monitoring started: ${name}`, LEVEL[name]?.colour);
+        addLog(k.t, S.lastLevel !== null ? `${S.lastLevel} → ${name}` : `Monitoring started: ${name}`, LEVEL[name]?.colour);
         S.lastLevel = name;
       }
       if (k.quality !== S.lastQuality && S.lastQuality !== null && (k.quality === "invalid" || S.lastQuality === "invalid")) {
@@ -343,35 +325,34 @@ export function mountLive(root, concept, meta) {
       }
       S.lastQuality = k.quality;
       for (const ch of k.intervention_changes || []) {
-        if (ch.status === "pending") addLog(ch.onset_t, `${ch.label} (${ch.origin === "manual" ? "clinician" : "pump/EHR"})`, "#6a1b9a");
-        else if (ch.final) addLog(k.t, `${ch.label}: ${ch.status} (final)`, "#6a1b9a");
+        if (ch.status === "pending") addLog(ch.onset_t, `${ch.label} (${ch.origin === "manual" ? "clinician" : "pump/EHR"})`, COL.forecast);
+        else if (ch.final) addLog(k.t, `${ch.label}: ${ch.status}`, COL.forecast);
       }
+      if (k.waveforms) S.lastWave = k.waveforms;
     }
     const k = ticks[ticks.length - 1];
     if (!k) return;
-    renderBanner(k);
-    renderTiles(k);
-    renderInterventions(k);
-    if (k.waveforms) renderStrips(k);
-    renderCharts();
-    clock.textContent = `${fmt.time(k.t)} / ${fmt.time(S.rec.duration_sec)}`;
+    renderAlarm(k);
+    renderParams(k);
+    redraw();
+    clock.replaceChildren(el("b", {}, fmt.time(k.t)), el("span", {}, ` / ${fmt.time(S.rec.duration_sec)}`));
   }
 
   // ------------------------------------------------------------------ actions
   async function startSession() {
     stop();
     if (S.sid) api(`/api/session/${S.sid}`, { method: "DELETE" }).catch(() => {});
-    S.ticks = []; S.log = []; S.lastLevel = null; S.lastQuality = null;
+    S.ticks = []; S.log = []; S.lastLevel = null; S.lastQuality = null; S.lastWave = null;
     logList.replaceChildren(); showError("");
-    banner.className = "alert-banner lvl-IDLE";
-    banner.replaceChildren(el("div", { class: "level" }, "READY"), el("div", { class: "reason" }, "Press Play to stream the recording through the model."), el("div"));
+    alarm.className = "pm-alarm lvl-IDLE";
+    alarm.replaceChildren(el("div", { class: "pm-alarm-txt" }, el("div", { class: "pm-alarm-level" }, "READY"),
+      el("div", { class: "pm-alarm-reason" }, "Press Play to stream the recording through the model.")));
     const recId = recSelect.value;
     const start = startSelect.value === "" ? null : Number(startSelect.value);
     try {
       const res = await api("/api/session", { method: "POST", body: { recording_id: recId, concept, start_sec: start } });
       S.sid = res.session_id;
       S.rec = res.recording;
-      clock.textContent = `${fmt.time(start ?? S.rec.first_window_end)} / ${fmt.time(S.rec.duration_sec)}`;
       await advance(1);
     } catch (e) { showError(e.message); }
   }
@@ -402,10 +383,10 @@ export function mountLive(root, concept, meta) {
   async function confirmMark(btn) {
     const kind = btn.dataset.kind;
     if (S.pendingConfirm !== btn) {
-      // Error prevention (Nielsen): a second, explicit click confirms the entry.
+      // Error prevention (Nielsen): a second, explicit press confirms the entry.
       if (S.pendingConfirm) S.pendingConfirm.textContent = S.pendingConfirm.dataset.label;
       btn.dataset.label = btn.dataset.label || btn.textContent;
-      btn.textContent = `Confirm ${kind} at ${fmt.time(S.ticks.at(-1)?.t)}?`;
+      btn.textContent = `Confirm at ${fmt.time(S.ticks.at(-1)?.t)}?`;
       btn.classList.add("confirm");
       S.pendingConfirm = btn;
       setTimeout(() => { if (S.pendingConfirm === btn) { btn.textContent = btn.dataset.label; btn.classList.remove("confirm"); S.pendingConfirm = null; } }, 4000);
@@ -414,11 +395,11 @@ export function mountLive(root, concept, meta) {
     btn.textContent = btn.dataset.label; btn.classList.remove("confirm"); S.pendingConfirm = null;
     try {
       const res = await api(`/api/session/${S.sid}/event`, { method: "POST", body: { type: kind } });
-      addLog(res.record.onset_t, `${res.record.label}`, "#6a1b9a");
+      addLog(res.record.onset_t, res.record.label, COL.forecast);
       if (S.ticks.length) {
         const last = S.ticks.at(-1);
         last.interventions = [...(last.interventions || []), res.record];
-        renderInterventions(last);
+        renderTx(last);
       }
     } catch (e) { showError(e.message); }
   }
@@ -450,15 +431,20 @@ export function mountLive(root, concept, meta) {
   });
   truthToggle.addEventListener("change", () => {
     S.truth = truthToggle.checked;
-    root.querySelectorAll(".truth-legend").forEach((x) => (x.hidden = !S.truth));
-    if (S.ticks.length) { renderTiles(S.ticks.at(-1)); renderCharts(); }
+    if (S.ticks.length) { renderParams(S.ticks.at(-1)); renderCharts(); }
   });
+  const openHelp = (open) => { help.hidden = !open; if (open) help.querySelector("button").focus(); };
+  helpBtn.addEventListener("click", () => openHelp(true));
+  help.querySelector("button").addEventListener("click", () => openHelp(false));
+  help.addEventListener("click", (e) => { if (e.target === help) openHelp(false); });
   const onKey = (e) => {
+    if (e.code === "Escape") { openHelp(false); return; }
     if (["INPUT", "SELECT", "TEXTAREA"].includes(document.activeElement?.tagName)) return;
     if (e.code === "Space") { e.preventDefault(); S.playing ? stop() : play(); }
     if (e.code === "ArrowRight") { e.preventDefault(); stop(); advance(1); }
   };
-  const onResize = () => { if (S.ticks.length) { renderCharts(); const w = S.ticks.findLast((x) => x.waveforms); if (w) renderStrips(w); } };
+  let resizeTimer = null;
+  const onResize = () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(redraw, 80); };
   window.addEventListener("keydown", onKey);
   window.addEventListener("resize", onResize);
 

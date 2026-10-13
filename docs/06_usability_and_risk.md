@@ -18,6 +18,8 @@
 | Decision | Source |
 |----------|--------|
 | Alert colours follow IEC 60601-1-8 priorities (cyan for low, yellow for medium, red for high), each with a distinct **shape icon**, so priority is readable without colour vision | IEC 60601-1-8; accessibility |
+| Each concept opens as a full-screen, non-scrolling bedside-monitor display (top alarm message field; ECG green / ART red / PLETH cyan channels; large numeric boxes in the channel colour; bottom soft-keys) | Supervisor review: users expect monitor conventions; nothing safety-relevant may sit below the fold |
+| HR is shown as on a monitor, counted from the on-screen ECG (or PR from the pleth if the ECG is missing or disagrees), labelled "display only" | Orientation; it is not a verified model output |
 | The alert banner is always in the same place, with the same controls, in A and B | BMED 8.2.5.3: alarm-silence and power buttons must not swap position between modes (consistency lesson) |
 | Every alert carries a plain-language **reason** and P(MAP < 65) | FDA CDS guidance (the user can review the basis); Nielsen 1 |
 | Technical alarm (SIGNAL CHECK) is separate from physiological alarms | IEC 60601-1-8 technical vs physiological alarm conditions |
